@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { verify } from 'iota-sig2'
+import { verify } from 'signature-validation-tool'
 
 class App extends Component {
   constructor(props) {

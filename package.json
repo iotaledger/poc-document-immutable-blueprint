@@ -1,13 +1,13 @@
 {
-  "name": "iri-monitor",
+  "name": "poc-document-immutable-blueprint",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "iota-css-theme": "git+https://github.com/iotaledger/iota-css-theme.git",
-    "iota-sig2": "git+https://github.com/mtrabelsi/iota-sig.git",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "signature-validation-tool": "git+https://github.com/iotaledger/signature-validation-tool.git"
   },
   "scripts": {
     "start": "react-scripts start",
