@@ -25,7 +25,7 @@ class DropDown extends Component {
 
   render() {
     return (
-      <div style={{width: '350px'}} className={`drop-selector ${this.state.expand? 'drop-selector__expanded' : ''}`} onClick={this.expand}>
+      <div style={this.props.styles} className={`drop-selector ${this.state.expand? 'drop-selector__expanded' : ''}`} onClick={this.expand}>
           <div className="drop-selector-title">
               <div className="drop-selector-title__text">{this.state.selected || 'Provider'}</div>
               <div className="drop-selector-title__icon"></div>

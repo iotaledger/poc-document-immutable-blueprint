@@ -4,6 +4,7 @@ import nodes from './nodes'
 import DropDown from './Dropdown'
 //IFWT9BLRWACAJHCMTBKDPYRDAWUQSYVIPTLQSRKJJ9XCIPVXTZSNSABBRWEQDVOGIVHFLXZGI9XSA9999
 //MRDVKCDQAPYQOJEQTUWDMNYZKDUDBRNHJWV9VTKTCUUYQICLPFBETMYYVKEPFCXZE9EJZHFUWJZVEWUCWSGDUVMOYD
+const styles = {width: '360px'}
 
 class App extends Component {
   constructor(props) {
@@ -75,21 +76,29 @@ class App extends Component {
             />
           </div>
           <div className="button-container button-container__center">
-            <DropDown nodes={nodes} onProviderSelected={this.onProviderSelected}/>
+            <DropDown
+              nodes={nodes}
+              onProviderSelected={this.onProviderSelected}
+              styles={styles}
+            />
           </div>
           <div className="button-container button-container__center">
             <input className="button button--secondary"
                    type="text"
                    id="input"
                    name="txhash"
+                   style={styles}
                    placeholder="TX Hash"
                    value={this.state.transactionHash}
                    onChange={this.handleInputTextChange}
             />
+          </div>
+          <div className="button-container button-container__center">
             <input className="button button--secondary"
                    type="text"
                    id="input"
                    name="address"
+                   style={styles}
                    placeholder="Channel Address"
                    value={this.state.address}
                    onChange={this.handleInputTextChange}
