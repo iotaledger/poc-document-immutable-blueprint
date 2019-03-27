@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { verify } from 'signature-validation-tool'
 import nodes from './nodes'
 import DropDown from './Dropdown'
-
+//IFWT9BLRWACAJHCMTBKDPYRDAWUQSYVIPTLQSRKJJ9XCIPVXTZSNSABBRWEQDVOGIVHFLXZGI9XSA9999
+//MRDVKCDQAPYQOJEQTUWDMNYZKDUDBRNHJWV9VTKTCUUYQICLPFBETMYYVKEPFCXZE9EJZHFUWJZVEWUCWSGDUVMOYD
 
 class App extends Component {
   constructor(props) {
@@ -41,12 +42,12 @@ class App extends Component {
     reader.addEventListener("loadend", () => {
        const file = reader.result
        const bundle = {
-         /*address:,
-         hash:,
-         provider:*/
+         address: this.state.address,
+         hash: this.state.transactionHash,
+         provider: this.state.provider
        }
        verify(
-              this.state.transactionHash,
+              bundle,
               true,
               file,
               (verified) => console.log(verified)
