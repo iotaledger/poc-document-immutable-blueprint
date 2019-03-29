@@ -13,3 +13,11 @@
  this Poc was heavily based on this library (https://github.com/iotaledger/signature-validation-tool) it can be used as a command line tool.
  
  So you can build your custom Document Immutability check!
+ 
+ # Deployment
+ 
+ Use:
+ 
+ - npm run build
+ - now
+ 
