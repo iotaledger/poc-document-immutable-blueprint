@@ -14,13 +14,13 @@ class DropDown extends Component {
   expand(e) {
     this.setState({expand: true})
   }
-  handleInputTextChange(e, node) {
+  handleInputTextChange(e, node, isMainnet) {
     e.stopPropagation()
     this.setState({
       selected: node,
       expand: false
     })
-    this.props.onProviderSelected(node)
+    this.props.onProviderSelected(node, isMainnet)
   }
 
   render() {
@@ -33,7 +33,7 @@ class DropDown extends Component {
           <ul className="drop-selector-list">
               {this.props.nodes.map(node => {
                 return (<li key={node.nodeId} className={`drop-selector-list-item ${this.state.selected === node.nodeId? 'drop-selector-list-item__selected' : ''}`}>
-                          <a href="#" onClick={e => this.handleInputTextChange(e, node.nodeId)}>
+                          <a href="#" onClick={e => this.handleInputTextChange(e, node.nodeId, node.isMainnet)}>
                               {node.nodeId}
                           </a>
                       </li>)

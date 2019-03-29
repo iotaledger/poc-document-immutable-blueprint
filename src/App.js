@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { verify, hash } from 'signature-validation-tool'
+import { verify, hash, publish } from 'signature-validation-tool'
 import nodes from './nodes'
 import DropDown from './Dropdown'
 //IFWT9BLRWACAJHCMTBKDPYRDAWUQSYVIPTLQSRKJJ9XCIPVXTZSNSABBRWEQDVOGIVHFLXZGI9XSA9999
 //MRDVKCDQAPYQOJEQTUWDMNYZKDUDBRNHJWV9VTKTCUUYQICLPFBETMYYVKEPFCXZE9EJZHFUWJZVEWUCWSGDUVMOYD
 const styles = {width: '360px'}
+
+function getProviderParams(isMainnet) {
+  return isMainnet ? {depth :3, minWeightMagnitude :14} : {depth :3, minWeightMagnitude :9}
+}
 
 class App extends Component {
   constructor(props) {
@@ -24,10 +28,12 @@ class App extends Component {
     this.reset = this.reset.bind(this)
     this.handleInputTextChange = this.handleInputTextChange.bind(this)
     this.onProviderSelected = this.onProviderSelected.bind(this)
+    this.signDocument = this.signDocument.bind(this)
   }
-  onProviderSelected(provider) {
+  onProviderSelected(provider, isMainnet) {
     this.setState({
-      provider
+      provider,
+      isMainnet
     })
   }
   handleInputTextChange(e) {
@@ -39,8 +45,40 @@ class App extends Component {
       this.setState({
         address: e.target.value
       })
+    } else if(e.target.name === 'pubAddress') {
+      this.setState({
+        pubAddress: e.target.value
+      })
+    } else if(e.target.name === 'pubSeed') {
+      this.setState({
+        pubSeed: e.target.value
+      })
     }
-
+  }
+  signDocument(e) {
+    const provider = this.state.provider
+    const data = this.state.hashValue
+    const address = this.state.pubAddress
+    const seed = this.state.pubSeed
+    const { depth, minWeightMagnitude } = getProviderParams(this.state.isMainnet)
+    publish({
+      provider,
+      data,
+      address,
+      seed,
+      depth,
+      minWeightMagnitude
+    }, (retArr) => {
+      navigator.clipboard.writeText(retArr[0].hash).then(function() {
+        /* clipboard successfully set */
+        alert('TX Hash copied to clipboard!')
+      }, function() {
+        alert('clipboard not supported, please copy manually the generated TX Hash')
+      });
+      this.setState({
+        genTxHash: retArr[0].hash
+      })
+    })
   }
   verify(e) {
     const reader = new FileReader();
@@ -75,26 +113,24 @@ class App extends Component {
     reader.readAsArrayBuffer(file);
   }
   render() {
-    const docMutated = this.state.docMutated
-    const title = 'Please fill the form'
-    const text = `Please fill the form above, make sure you pick up the right provider.
+    let docMutated = this.state.docMutated
+    let title = 'Please fill the form'
+    let text = `Please fill the form above, make sure you pick up the right provider.
     If you don't have TX Hash or Chnnel Address yet, then you have to publish your document and get these infos.`
-    const cssClass = 'message-box__info'
-    if(docMutated === 0) {
+    let cssClass = 'message-box__info'
+    if(docMutated === false) {
       cssClass = 'message-box__danger'
-      const title = 'Document not valid anymore'
-      const text = `The calculated Hash didn't match with the saved one`
-      const cssClass = 'message-box__info'
-    } else if(docMutated === 1) {
+      title = 'Document not valid anymore'
+      text = `The calculated Hash didn't match with the saved one`
+    } else if(docMutated === true) {
       cssClass = 'message-box__success'
-      const title = 'Document Valid!'
-      const text = `The document hash haven't been mutated since its first signature with the Tangle.`
-      const cssClass = 'message-box__info'
+      title = 'Document Valid!'
+      text = `The document hash haven't been mutated since its first signature with the Tangle.`
     }
     return (
       <div className="layouts--search">
          <div className="middle-column">
-           <h1 className="text text--level1 text--primary">General params</h1>
+           <h1 className="text text--level1 text--primary">1 - General params</h1>
            <div className="button-container button-container__center">
              <input className="button button--secondary"
                     type="file"
@@ -111,9 +147,30 @@ class App extends Component {
            </div>
 
            <div className="horizontal-rule"></div>
-           <h1 className="text text--level1 text--primary">Document Signature</h1>
+           <h1 className="text text--level1 text--primary">2 - Document Signature (can be omitted)</h1>
 
-
+           <div className="button-container button-container__center">
+             <input className="button button--secondary"
+                    type="text"
+                    id="input"
+                    name="pubAddress"
+                    style={styles}
+                    placeholder="Publish Address, if omitted default"
+                    value={this.state.pubAddress}
+                    onChange={this.handleInputTextChange}
+             />
+           </div>
+           <div className="button-container button-container__center">
+             <input className="button button--secondary"
+                    type="text"
+                    id="input"
+                    name="pubSeed"
+                    style={styles}
+                    placeholder="Seed, if omitted default is taken"
+                    value={this.state.pubSeed}
+                    onChange={this.handleInputTextChange}
+             />
+           </div>
            <div className="button-container button-container__center">
             <button className="button" onClick={this.signDocument}>Sign the document</button>
             <button className="button" onClick={this.reset}>Clear</button>
@@ -129,7 +186,7 @@ class App extends Component {
 
            <div className="horizontal-rule"></div>
 
-           <h1 className="text text--level1 text--primary">Document Validation</h1>
+           <h1 className="text text--level1 text--primary">3 - Document Validation</h1>
 
           <div className="button-container button-container__center">
             <input className="button button--secondary"
@@ -148,7 +205,7 @@ class App extends Component {
                    id="input"
                    name="address"
                    style={styles}
-                   placeholder="Channel Address"
+                   placeholder="Fetch Address"
                    value={this.state.address}
                    onChange={this.handleInputTextChange}
             />
