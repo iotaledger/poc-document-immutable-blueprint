@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { verify, hash, publish } from 'signature-validation-tool'
 import nodes from './nodes'
 import DropDown from './Dropdown'
-//IFWT9BLRWACAJHCMTBKDPYRDAWUQSYVIPTLQSRKJJ9XCIPVXTZSNSABBRWEQDVOGIVHFLXZGI9XSA9999
-//MRDVKCDQAPYQOJEQTUWDMNYZKDUDBRNHJWV9VTKTCUUYQICLPFBETMYYVKEPFCXZE9EJZHFUWJZVEWUCWSGDUVMOYD
+
 const styles = {width: '360px'}
 
 function getProviderParams(isMainnet) {
