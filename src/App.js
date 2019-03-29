@@ -71,7 +71,7 @@ class App extends Component {
     }, (retArr) => {
       navigator.clipboard.writeText(retArr[0].hash).then(function() {
         /* clipboard successfully set */
-        alert('TX Hash copied to clipboard!')
+        alert('TX Hash has been copied to clipboard!')
       }, function() {
         alert('clipboard not supported, please copy manually the generated TX Hash')
       });
@@ -178,9 +178,10 @@ class App extends Component {
 
            <div className="button-container button-container__center">
               <div style={{display: 'block'}}>
+                <div><span className="text text--level2">Calculated Hash Value:</span></div>
                 <div>{this.state.hashValue}</div>
+                <div><span className="text text--level2">Generated TX Hash:</span></div>
                 <div>{this.state.genTxHash}</div>
-                <div>{this.state.genChannelAddress}</div>
               </div>
            </div>
 
