@@ -2,8 +2,8 @@
 
   # Before starting
 
-  due to some restriction about the Cross-origin of *thetange.org* - it blocks all connections coming from unkown hosts like yours - we are required to install this plugin to override the cross-origin automatically: https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc
-
-  make sure to enable it.
-
-  Please also enable it before usage.
+  Before you can use this PoC, you have to pick up a provider and a document to check (Step 1)
+  
+  then you can either sign brand new document(Step2) or Check an existing document (Jump directly to Step 3)
+  
+  Here the link for the Poc ( https://build-outegjwjuo.now.sh/ )
