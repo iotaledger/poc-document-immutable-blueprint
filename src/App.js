@@ -18,6 +18,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      pathname: window.location.pathname,
       pageTitle: 'No Title?',
       file: null,
       transactionHash: '',
@@ -127,9 +128,12 @@ class App extends Component {
     return (
         <Router>
           <div>
-            <Header pageTitle={this.state.pageTitle} />
+            <Header pageTitle={this.state.pageTitle} location={this.state.pathname} />
 
-            <Route exact path="/" component={() => <GeneralParams handleFileSet={this.handleFileSet} onProviderSelected={this.onProviderSelected} hashValue={this.state.hashValue} />} />
+            <Route exact path="/" component={(match) => (<GeneralParams
+                                                      handleFileSet={this.handleFileSet}
+                                                      onProviderSelected={this.onProviderSelected}
+                                                      hashValue={this.state.hashValue} />)} />
             <Route path="/sign" component={() => (<DocumentSignature
                                                     pubAddress={this.state.pubAddress}
                                                     handleInputTextChange={this.handleInputTextChange}
@@ -138,14 +142,14 @@ class App extends Component {
                                                     hashValue={this.state.hashValue}
                                                     genTxHash={this.state.genTxHash} />)} />
             <Route path="/verif" component={() => (<DocumentVerification
-                                    transactionHash={this.state.transactionHash}
-                                    handleInputTextChange={this.handleInputTextChange}
-                                    address={this.state.address}
-                                    onChange={this.handleInputTextChange}
-                                    reset={this.reset}
-                                    docMutated={this.state.docMutated}
-                                    verify={this.verify}
-                                    reset={this.reset}/>)} />
+                                                      transactionHash={this.state.transactionHash}
+                                                      handleInputTextChange={this.handleInputTextChange}
+                                                      address={this.state.address}
+                                                      onChange={this.handleInputTextChange}
+                                                      reset={this.reset}
+                                                      docMutated={this.state.docMutated}
+                                                      verify={this.verify}
+                                                      reset={this.reset}/>)} />
           </div>
         </Router>
       );

@@ -28,7 +28,7 @@ class App extends Component {
                id="input"
                name="pubAddress"
                style={styles}
-               placeholder="Publish Address, if omitted default"
+               placeholder="Publish Address"
                value={this.props.pubAddress}
                onChange={this.props.handleInputTextChange}
         />
@@ -39,7 +39,7 @@ class App extends Component {
                id="input"
                name="pubSeed"
                style={styles}
-               placeholder="Seed, if omitted default is taken"
+               placeholder="Seed"
                value={this.props.pubSeed}
                onChange={this.props.handleInputTextChange}
         />
