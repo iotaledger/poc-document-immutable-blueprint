@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { verify, hash, publish } from 'signature-validation-tool'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodes from './nodes'
 import DropDown from './Dropdown'
+import DocumentSignature from './partials/DocumentSignature'
+import DocumentVerification from './partials/DocumentVerification'
+import GeneralParams from './partials/GeneralParams'
+import Header from './partials/header'
 
 const styles = {width: '360px'}
 
@@ -13,6 +18,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      pageTitle: 'No Title?',
       file: null,
       transactionHash: '',
       provider: '',
@@ -28,6 +34,12 @@ class App extends Component {
     this.handleInputTextChange = this.handleInputTextChange.bind(this)
     this.onProviderSelected = this.onProviderSelected.bind(this)
     this.signDocument = this.signDocument.bind(this)
+    this.setTitle = this.setTitle.bind(this)
+  }
+  setTitle(title) {
+    this.setState({
+      pageTitle: title
+    })
   }
   onProviderSelected(provider, isMainnet) {
     this.setState({
@@ -112,6 +124,33 @@ class App extends Component {
     reader.readAsArrayBuffer(file);
   }
   render() {
+    return (
+        <Router>
+          <div>
+            <Header pageTitle={this.state.pageTitle} />
+
+            <Route exact path="/" component={() => <GeneralParams handleFileSet={this.handleFileSet} onProviderSelected={this.onProviderSelected} hashValue={this.state.hashValue} />} />
+            <Route path="/sign" component={() => (<DocumentSignature
+                                                    pubAddress={this.state.pubAddress}
+                                                    handleInputTextChange={this.handleInputTextChange}
+                                                    pubSeed={this.state.pubSeed}
+                                                    signDocument={this.signDocument}
+                                                    hashValue={this.state.hashValue}
+                                                    genTxHash={this.state.genTxHash} />)} />
+            <Route path="/verif" component={() => (<DocumentVerification
+                                    transactionHash={this.state.transactionHash}
+                                    handleInputTextChange={this.handleInputTextChange}
+                                    address={this.state.address}
+                                    onChange={this.handleInputTextChange}
+                                    reset={this.reset}
+                                    docMutated={this.state.docMutated}
+                                    verify={this.verify}
+                                    reset={this.reset}/>)} />
+          </div>
+        </Router>
+      );
+  }
+  /*render() {
     let docMutated = this.state.docMutated
     let title = 'Please fill the form'
     let text = `Please fill the form above, make sure you pick up the right provider.
@@ -228,7 +267,7 @@ class App extends Component {
          </div>
        </div>
     );
-  }
+  } */
 }
 
 export default App;
