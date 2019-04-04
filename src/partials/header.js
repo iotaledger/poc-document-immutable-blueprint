@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 const navMap = new Map();
-navMap.set('/', {pageTitle: 'General Parameters', prev: null, next: '/sign'})
-      .set('/sign', {pageTitle: 'Sign Document (Optional if you have already signed a document)', prev: '/', next: '/verif'})
-      .set('/verif', {pageTitle: 'Verify Document', prev: '/sign', next: null})
+navMap.set('/', { curP: '/', pageTitle: '1- Please choose your file and the Tangle to connect to', prev: null, next: '/sign'})
+      .set('/sign', {curP: '/sign', pageTitle: '2- Sign Document (Optional if you have already signed a document)', prev: '/', next: '/verif'})
+      .set('/verif', {curP: '/verif', pageTitle: '3- Verify Document', prev: '/sign', next: null})
 
 class Header extends Component {
   constructor(props) {
@@ -16,9 +16,9 @@ class Header extends Component {
   changeLocation(forward) {
     const currPath = window.location.pathname
     if(forward) {
-      this.setState({ currPath: navMap.get(currPath).next })
+      this.setState({ currPath: navMap.get(currPath).next ?  navMap.get(currPath).next : navMap.get(currPath).curP })
     } else {
-      this.setState({ currPath: navMap.get(currPath).prev })
+      this.setState({ currPath: navMap.get(currPath).prev ? navMap.get(currPath).prev : navMap.get(currPath).curP })
     }
   }
   render() {
@@ -27,9 +27,21 @@ class Header extends Component {
         <div className="sub-header">
             <span className="sub-header__title">{currScrData.pageTitle}</span>
             <section className="sub-header__body">
-                <Link to={currScrData.prev}><button onClick={e => this.changeLocation(0)} className="arrow-button arrow-button--left"></button></Link>
+                <Link to={`${currScrData.prev ? currScrData.prev : currScrData.curP}`}>
+                  <button
+                    onClick={e => this.changeLocation(0)}
+                    disabled={!currScrData.prev ? true: false}
+                    className={`arrow-button arrow-button--left`}
+                  />
+                </Link>
                 <span className="sub-header__bottom-title">{currScrData.pageTitle}</span>
-                <Link to={currScrData.next}><button onClick={e => this.changeLocation(1)} className="arrow-button arrow-button--right"></button></Link>
+                <Link  to={`${currScrData.next ? currScrData.next : currScrData.curP}`}>
+                  <button
+                    onClick={e => this.changeLocation(1)}
+                    disabled={!currScrData.next ? true: false}
+                    className="arrow-button arrow-button--right"
+                  />
+                </Link>
             </section>
         </div>
       </section>)
