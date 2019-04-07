@@ -9,7 +9,10 @@ function getProviderParams(isMainnet) {
   return isMainnet ? {depth :3, minWeightMagnitude :14} : {depth :3, minWeightMagnitude :9}
 }
 
-class App extends Component {
+class GeneralParams extends Component {
+  constructor(props) {
+    super(props)
+  }
   render() {
     let everythingIsOk = (this.props.hashValue!='' && this.props.provider!='')
     let title = 'Please fill the form'
@@ -58,4 +61,4 @@ class App extends Component {
 }
 
 
-export default App
+export default GeneralParams

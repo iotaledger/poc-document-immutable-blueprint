@@ -130,20 +130,28 @@ class App extends Component {
     return (
         <Router>
           <div>
-            <Header pageTitle={this.state.pageTitle} location={this.state.pathname} />
+            <Header
+              pageTitle={this.state.pageTitle}
+              location={this.state.pathname}
+              enableNextPage={this.state.enableNextPage}
+            />
 
             <Route exact path="/" component={(match) => (<GeneralParams
                                                       handleFileSet={this.handleFileSet}
                                                       onProviderSelected={this.onProviderSelected}
                                                       hashValue={this.state.hashValue}
-                                                      provider={this.state.provider} />)} />
+                                                      provider={this.state.provider}
+                                                      setNextPage={this.setNextPage}
+                                                      />)} />
             <Route path="/sign" component={() => (<DocumentSignature
                                                     pubAddress={this.state.pubAddress}
                                                     handleInputTextChange={this.handleInputTextChange}
                                                     pubSeed={this.state.pubSeed}
                                                     signDocument={this.signDocument}
                                                     hashValue={this.state.hashValue}
-                                                    genTxHash={this.state.genTxHash} />)} />
+                                                    genTxHash={this.state.genTxHash}
+                                                    setNextPage={this.setNextPage}
+                                                    />)} />
             <Route path="/verif" component={() => (<DocumentVerification
                                                       transactionHash={this.state.transactionHash}
                                                       handleInputTextChange={this.handleInputTextChange}
