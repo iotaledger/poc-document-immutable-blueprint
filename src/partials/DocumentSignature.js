@@ -13,15 +13,40 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      file: null,
-      transactionHash: '',
-      provider: ''
+
     }
     // this.handleFileSet = this.handleFileSet.bind(this)
     // this.verify = this.verify.bind(this)
   }
   render() {
+    let isFormFilled = (this.props.pubAddress!='' && this.props.pubSeed!='')
+    let isFormatValid = isFormFilled
+    let everythingIsOk = isFormatValid && isFormFilled
+
+    let title = 'Please fill the form'
+    let text = `Please fill the Publishing Address and the SEED.`
+    let cssClass = 'message-box__info'
+    if(isFormFilled && !isFormatValid) {
+      cssClass = 'message-box__danger'
+      title = 'Data not valid'
+      text = `It seems that your Address/SEED are not valid please make sure they have 81 length and all Uppercase.`
+    } else if(everythingIsOk) {
+      cssClass = 'message-box__success'
+      title = 'Form Filled'
+      text = `Form has been filled, please press 'Sign the document', this will send the signature to the Tangle.`
+    }
     return(<div>
+      <div style={{ margin: '30px 0'}} className="button-container button-container__center">
+         <div className="button-container button-container__center">
+             <div className={`message-box ${cssClass}`} >
+               <div className="message-box--icon"></div>
+               <div className="message-box--text">
+                  <div className="message-box--title">{title}</div>
+                  <div className="message-box--content">{text}</div>
+               </div>
+             </div>
+         </div>
+      </div>
       <div className="button-container button-container__center">
         <input className="button button--secondary"
                type="text"

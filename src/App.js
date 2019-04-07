@@ -19,6 +19,8 @@ class App extends Component {
     super(props)
     this.state = {
       pathname: window.location.pathname,
+      pubSeed: '',
+      pubAddress: '',
       pageTitle: 'No Title?',
       file: null,
       transactionHash: '',
@@ -133,7 +135,8 @@ class App extends Component {
             <Route exact path="/" component={(match) => (<GeneralParams
                                                       handleFileSet={this.handleFileSet}
                                                       onProviderSelected={this.onProviderSelected}
-                                                      hashValue={this.state.hashValue} />)} />
+                                                      hashValue={this.state.hashValue}
+                                                      provider={this.state.provider} />)} />
             <Route path="/sign" component={() => (<DocumentSignature
                                                     pubAddress={this.state.pubAddress}
                                                     handleInputTextChange={this.handleInputTextChange}
