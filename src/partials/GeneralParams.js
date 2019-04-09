@@ -16,7 +16,7 @@ class GeneralParams extends Component {
   render() {
     let everythingIsOk = (this.props.hashValue!='' && this.props.provider!='')
     let title = 'Please fill the form'
-    let text = `Please select the Provider and the file that you want to Hash for Tangle validation`
+    let text = `Please select the Node and the file that you want to Hash for Tangle validation`
     let cssClass = 'message-box__info'
     if(everythingIsOk === true) {
       cssClass = 'message-box__success'
