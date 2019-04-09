@@ -51,6 +51,7 @@ class GeneralParams extends Component {
           nodes={nodes}
           onProviderSelected={this.props.onProviderSelected}
           styles={styles}
+          provider={this.props.provider}
         />
       </div>
       <div className="button-container button-container__center">
