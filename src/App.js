@@ -7,6 +7,7 @@ import DocumentSignature from './partials/DocumentSignature'
 import DocumentVerification from './partials/DocumentVerification'
 import GeneralParams from './partials/GeneralParams'
 import Header from './partials/header'
+import Loading from './partials/Loading'
 
 const styles = {width: '360px'}
 
@@ -29,7 +30,8 @@ class App extends Component {
       docMutated: null,
       hashValue: '',
       genTxHash: '',
-      genChannelAddress: ''
+      genChannelAddress: '',
+      isLoading: false
     }
     this.handleFileSet = this.handleFileSet.bind(this)
     this.verify = this.verify.bind(this)
@@ -70,6 +72,7 @@ class App extends Component {
     }
   }
   signDocument(e) {
+    this.setState({ isLoading: true })
     const provider = this.state.provider
     const data = this.state.hashValue
     const address = this.state.pubAddress
@@ -83,18 +86,23 @@ class App extends Component {
       depth,
       minWeightMagnitude
     }, (retArr) => {
-      navigator.clipboard.writeText(retArr[0].hash).then(function() {
+      navigator.clipboard.writeText(retArr[0].hash).then(() => {
         /* clipboard successfully set */
+        this.setState({
+          genTxHash: retArr[0].hash,
+          isLoading: false
+        })
         alert('TX Hash has been copied to clipboard!')
       }, function() {
         alert('clipboard not supported, please copy manually the generated TX Hash')
       });
-      this.setState({
-        genTxHash: retArr[0].hash
-      })
+
     })
   }
   verify(e) {
+    this.setState({
+      isLoading: true
+    })
     const reader = new FileReader();
     reader.addEventListener("loadend", () => {
        const file = reader.result
@@ -107,7 +115,7 @@ class App extends Component {
               bundle,
               true,
               file,
-              (verified) => this.setState({docMutated: verified})
+              (verified) => this.setState({ isLoading: false, docMutated: verified })
              )
     });
     reader.readAsArrayBuffer(this.state.file);
@@ -135,7 +143,7 @@ class App extends Component {
               location={this.state.pathname}
               enableNextPage={this.state.enableNextPage}
             />
-
+            {this.state.isLoading && <Loading />}
             <Route exact path="/" component={(match) => (<GeneralParams
                                                       handleFileSet={this.handleFileSet}
                                                       onProviderSelected={this.onProviderSelected}
