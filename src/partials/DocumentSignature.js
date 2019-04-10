@@ -22,8 +22,8 @@ class App extends Component {
     let isFormFilled = (this.props.pubAddress!='' && this.props.pubSeed!='')
     let isFormatValid = isFormFilled
     let everythingIsOk = isFormatValid && isFormFilled
-    let seedLink =  <a href='https://ipfs.io/ipfs/QmdqTgEdyKVQAVnfT5iV4ULzTbkV4hhkDkMqGBuot8egfA'>here (SEED)</a>
-    let AddLink =  <a href='https://people.dsv.su.se/~haughey/iota-offline/iota-offline-address-generator.html'>here (ADDRESS)</a>
+    let seedLink =  <a target="_blank" href='https://ipfs.io/ipfs/QmdqTgEdyKVQAVnfT5iV4ULzTbkV4hhkDkMqGBuot8egfA'>here (SEED)</a>
+    let AddLink =  <a target="_blank" href='https://people.dsv.su.se/~haughey/iota-offline/iota-offline-address-generator.html'>here (ADDRESS)</a>
     let title = 'Please fill the form'
     let text = <div className="message-box--content">{`Please generate a TESTING Seed and Address from`} {seedLink} and {AddLink}, do NOT use your real SEED/ADDRESS!</div>
     let cssClass = 'message-box__info'
