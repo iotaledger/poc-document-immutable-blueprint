@@ -28,11 +28,11 @@ class Header extends Component {
             <span className="sub-header__title">{currScrData.pageTitle}</span>
             <section className="sub-header__body">
                 <Link to={`${currScrData.prev ? currScrData.prev : currScrData.curP}`}>
-                  <button
+                  {(currScrData.curP !== '/') && <button
                     onClick={e => this.changeLocation(0)}
                     disabled={!currScrData.prev ? true: false}
                     className={`arrow-button arrow-button--left`}
-                  />
+                  />}
                 </Link>
                 <span className="sub-header__bottom-title">{currScrData.pageTitle}</span>
                 <Link  to={`${currScrData.next ? currScrData.next : currScrData.curP}`}>
