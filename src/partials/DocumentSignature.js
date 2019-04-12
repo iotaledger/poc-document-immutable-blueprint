@@ -25,7 +25,10 @@ class App extends Component {
     let seedLink =  <a target="_blank" href='https://ipfs.io/ipfs/QmdqTgEdyKVQAVnfT5iV4ULzTbkV4hhkDkMqGBuot8egfA'>here (SEED)</a>
     let AddLink =  <a target="_blank" href='https://people.dsv.su.se/~haughey/iota-offline/iota-offline-address-generator.html'>here (ADDRESS)</a>
     let title = 'Please fill the form'
-    let text = <div className="message-box--content">{`Please generate a TESTING Seed and Address from`} {seedLink} and {AddLink}, do NOT use your real SEED/ADDRESS!</div>
+    let text = (<div className="message-box--content">{`Please generate a TESTING Seed and Address from`} {seedLink} and {AddLink}. <br />
+    {`- Do NOT use your real SEED/ADDRESS! Once the Document is signed and you get TX hash, no one can mutate or re-sign that document, even though they got your SEED/ADDRESS.`} <br />
+    {`- Using different ADDRESSES is recommended to separate documents by type or category, so only ADDRESS and TX Hash is needed to retrieve the document hash`} <br />
+    </div>)
     let cssClass = 'message-box__info'
     if(isFormFilled && !isFormatValid) {
       cssClass = 'message-box__danger'
