@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { verify, hash, publish } from 'signature-validation-tool'
+import { dSeed, dAddress } from './defaults'
 // import nodes from './nodes'
 // import DropDown from './Dropdown'
 
@@ -13,10 +14,12 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      useDefault: true
     }
-    // this.handleFileSet = this.handleFileSet.bind(this)
-    // this.verify = this.verify.bind(this)
+    this.handleCheckbox = this.handleCheckbox.bind(this)
+  }
+  handleCheckbox(e) {
+    this.setState({ useDefault:  e.target.checked })
   }
   render() {
     let isFormFilled = (this.props.pubAddress!='' && this.props.pubSeed!='')
@@ -40,6 +43,8 @@ class App extends Component {
       text = <div className="message-box--content">{`Form has been filled, please press 'Sign the document', this will send the signature to the Tangle.`}</div>
     }
     return(<div>
+
+
       <div style={{ margin: '30px 0'}} className="button-container button-container__center">
          <div className="button-container button-container__center">
              <div className={`message-box ${cssClass}`} >
@@ -51,14 +56,25 @@ class App extends Component {
              </div>
          </div>
       </div>
+
+      <div className="button-container button-container__center">
+          <div className="checkbox">
+            <div className="checkbox-border">
+              <input type="checkbox" checked={this.state.useDefault} onClick={this.handleCheckbox}/>
+            </div>
+            <label>Using demo Address/Seed</label>
+          </div>
+      </div>
+
       <div className="button-container button-container__center">
         <input className="button button--secondary"
                type="text"
                id="input"
                name="pubAddress"
                style={styles}
+               disabled={this.state.useDefault}
                placeholder="Publish Address"
-               value={this.props.pubAddress}
+               value={this.state.useDefault? dAddress : this.props.pubAddress}
                onChange={this.props.handleInputTextChange}
         />
       </div>
@@ -68,8 +84,9 @@ class App extends Component {
                id="input"
                name="pubSeed"
                style={styles}
+               disabled={this.state.useDefault}
                placeholder="Seed"
-               value={this.props.pubSeed}
+               value={this.state.useDefault? dSeed : this.props.pubSeed}
                onChange={this.props.handleInputTextChange}
         />
       </div>
