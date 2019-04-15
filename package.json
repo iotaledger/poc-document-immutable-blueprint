@@ -8,7 +8,7 @@
     "react-dom": "^16.8.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.5",
-    "signature-validation-tool": "git+https://github.com/iotaledger/signature-validation-tool.git"
+    "iota-proof-tool": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
