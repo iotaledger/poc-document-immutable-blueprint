@@ -16,7 +16,7 @@ class GeneralParams extends Component {
   render() {
     let everythingIsOk = (this.props.hashValue!='' && this.props.provider!='')
     let title = 'Please fill the form'
-    let text = `Please select the Provider and the file that you want to Hash for Tangle validation`
+    let text = `Please select the Node and the file that you want to Hash for Tangle validation`
     let cssClass = 'message-box__info'
     if(everythingIsOk === true) {
       cssClass = 'message-box__success'
@@ -37,17 +37,21 @@ class GeneralParams extends Component {
          </div>
       </div>
       <div className="button-container button-container__center">
-        <input className="button button--secondary"
-               type="file"
-               id="input"
-               onChange={this.props.handleFileSet}
-        />
+        <div style={{ position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
+          <button className={`button ${this.props.hashValue ? 'button--secondary' : 'button--primary'}`}>{` ${this.props.hashValue ? 'file selected' : 'Select File to be hashed'}`} </button>
+          <input style={{ fontSize:'100px', opacity: '0', position: 'absolute', left: '0', top: '0' }}
+                 type="file"
+                 id="input"
+                 onChange={this.props.handleFileSet}
+          />
+        </div>
       </div>
       <div className="button-container button-container__center">
         <DropDown
           nodes={nodes}
           onProviderSelected={this.props.onProviderSelected}
           styles={styles}
+          provider={this.props.provider}
         />
       </div>
       <div className="button-container button-container__center">

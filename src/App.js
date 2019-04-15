@@ -8,6 +8,7 @@ import DocumentVerification from './partials/DocumentVerification'
 import GeneralParams from './partials/GeneralParams'
 import Header from './partials/header'
 import Loading from './partials/Loading'
+import { dSeed, dAddress } from './partials/defaults'
 
 const styles = {width: '360px'}
 
@@ -20,8 +21,8 @@ class App extends Component {
     super(props)
     this.state = {
       pathname: window.location.pathname,
-      pubSeed: '',
-      pubAddress: '',
+      pubSeed: dSeed,
+      pubAddress: dAddress,
       pageTitle: 'No Title?',
       file: null,
       transactionHash: '',

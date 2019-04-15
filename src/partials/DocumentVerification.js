@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     let docMutated = this.props.docMutated
     let title = 'Please fill the form'
-    let text = `Please fill the generated TX Hash and the Fetching Address, if you don't have them yet, please go to Step 2`
+    let text = `Please fill the generated TX Hash (should be in your clipboard) and the Fetching Testing Address, if you don't have them yet, please go to Step 2`
     let cssClass = 'message-box__info'
     if(docMutated === false) {
       cssClass = 'message-box__danger'
