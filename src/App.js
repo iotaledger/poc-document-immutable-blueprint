@@ -5,9 +5,10 @@ import nodes from './nodes'
 import DropDown from './Dropdown'
 import DocumentSignature from './partials/DocumentSignature'
 import DocumentVerification from './partials/DocumentVerification'
-import GeneralParams from './partials/GeneralParams'
+import SelectFile from './partials/SelectFile'
 import Header from './partials/header'
 import Loading from './partials/Loading'
+import Footer from './partials/footer'
 import { dSeed, dAddress } from './partials/defaults'
 
 const styles = {width: '360px'}
@@ -135,42 +136,52 @@ class App extends Component {
     });
     reader.readAsArrayBuffer(file);
   }
+
+
+
+
+
+
   render() {
     return (
         <Router>
-          <div>
-            <Header
-              pageTitle={this.state.pageTitle}
-              location={this.state.pathname}
-              enableNextPage={this.state.enableNextPage}
-            />
-            {this.state.isLoading && <Loading />}
-            <Route exact path="/" component={(match) => (<GeneralParams
-                                                      handleFileSet={this.handleFileSet}
-                                                      onProviderSelected={this.onProviderSelected}
+        <Header
+          pageTitle={this.state.pageTitle}
+          location={this.state.pathname}
+          enableNextPage={this.state.enableNextPage}
+        />
+        <div className="layouts--search">
+          <div className="middle-column" style={{border: '1px solid blue'}}>
+              {this.state.isLoading && <Loading />}
+              <Route exact path="/" component={(match) => (<SelectFile
+                                                        handleFileSet={this.handleFileSet}
+                                                        onProviderSelected={this.onProviderSelected}
+                                                        hashValue={this.state.hashValue}
+                                                        provider={this.state.provider}
+                                                        setNextPage={this.setNextPage}
+                                                        />)} />
+              <Route path="/sign" component={() => (<DocumentSignature
+                                                      pubAddress={this.state.pubAddress}
+                                                      handleInputTextChange={this.handleInputTextChange}
+                                                      pubSeed={this.state.pubSeed}
+                                                      signDocument={this.signDocument}
                                                       hashValue={this.state.hashValue}
-                                                      provider={this.state.provider}
+                                                      genTxHash={this.state.genTxHash}
                                                       setNextPage={this.setNextPage}
                                                       />)} />
-            <Route path="/sign" component={() => (<DocumentSignature
-                                                    pubAddress={this.state.pubAddress}
-                                                    handleInputTextChange={this.handleInputTextChange}
-                                                    pubSeed={this.state.pubSeed}
-                                                    signDocument={this.signDocument}
-                                                    hashValue={this.state.hashValue}
-                                                    genTxHash={this.state.genTxHash}
-                                                    setNextPage={this.setNextPage}
-                                                    />)} />
-            <Route path="/verif" component={() => (<DocumentVerification
-                                                      transactionHash={this.state.transactionHash}
-                                                      handleInputTextChange={this.handleInputTextChange}
-                                                      address={this.state.address}
-                                                      onChange={this.handleInputTextChange}
-                                                      reset={this.reset}
-                                                      docMutated={this.state.docMutated}
-                                                      verify={this.verify}
-                                                      reset={this.reset}/>)} />
+              <Route path="/verif" component={() => (<DocumentVerification
+                                                        transactionHash={this.state.transactionHash}
+                                                        handleInputTextChange={this.handleInputTextChange}
+                                                        address={this.state.address}
+                                                        onChange={this.handleInputTextChange}
+                                                        reset={this.reset}
+                                                        docMutated={this.state.docMutated}
+                                                        verify={this.verify}
+                                                        reset={this.reset}/>)} />
+
+            </div>
           </div>
+          <Footer />
         </Router>
       );
   }

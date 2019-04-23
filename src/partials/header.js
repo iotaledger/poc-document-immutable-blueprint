@@ -23,7 +23,9 @@ class Header extends Component {
   }
   render() {
     const currScrData = navMap.get(this.state.currPath)
-    return (<section className="sub-header__wrapper">
+    return (<div>
+      <section className="sub-header__wrapper">
+        <img style={{ position: 'absolute', top: '25px', left: '30px' }} src="assets/Logo.svg" />
         <div className="sub-header">
             <span className="sub-header__title">{currScrData.pageTitle}</span>
             <section className="sub-header__body">
@@ -44,7 +46,18 @@ class Header extends Component {
                 </Link>
             </section>
         </div>
-      </section>)
+      </section>
+      <div className="step-progress-bar">
+        <div className="step-progress-bar-item step-progress-bar-item--visited">
+        </div>
+        <div className="step-progress-bar-item step-progress-bar-item--visited">
+        </div>
+        <div className="step-progress-bar-item step-progress-bar-item--visited">
+        </div>
+        <div className="step-progress-bar-item">
+        </div>
+      </div>
+    </div>)
   }
 }
 

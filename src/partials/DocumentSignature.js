@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { verify, hash, publish } from 'iota-proof-tool'
 import { dSeed, dAddress } from './defaults'
+import Radio from './radio'
 // import nodes from './nodes'
 // import DropDown from './Dropdown'
 
@@ -44,7 +45,6 @@ class App extends Component {
     }
     return(<div>
 
-
       <div style={{ margin: '30px 0'}} className="button-container button-container__center">
          <div className="button-container button-container__center">
              <div className={`message-box ${cssClass}`} >
@@ -58,12 +58,8 @@ class App extends Component {
       </div>
 
       <div className="button-container button-container__center">
-          <div className="checkbox">
-            <div className="checkbox-border">
-              <input type="checkbox" checked={this.state.useDefault} onClick={this.handleCheckbox}/>
-            </div>
-            <label>Using demo Address/Seed</label>
-          </div>
+          <Radio label="Use the default Address and Seed" />
+              {/*<input type="checkbox" checked={this.state.useDefault} onClick={this.handleCheckbox}/>*/}
       </div>
 
       <div className="button-container button-container__center">
