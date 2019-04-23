@@ -29,7 +29,7 @@ class SelectFile extends Component {
     }
     return(<div>
 
-      <div style={{ margin: '30px 0'}}>
+      <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'center' }}>
         <span
           style={{ fontSize: '64px', color: '#019792' }}
           className="text">
