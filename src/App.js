@@ -135,7 +135,7 @@ class App extends Component {
           enableNextPage={this.state.enableNextPage}
         />
         <div className="layouts--search">
-          <div className="middle-column" style={{border: '1px solid blue'}}>
+          <div className="middle-column">
               {this.state.isLoading && <Loading />}
               <Route exact path="/" component={(match) => (<SelectFile
                                                         handleFileSet={this.handleFileSet}
