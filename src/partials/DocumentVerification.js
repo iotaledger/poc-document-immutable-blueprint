@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { verify, hash, publish } from 'iota-proof-tool'
+import Title from './title'
 // import nodes from './nodes'
 // import DropDown from './Dropdown'
 
-const styles = {width: '360px'}
+const styles = {width: '100%'}
 
 function getProviderParams(isMainnet) {
   return isMainnet ? {depth :3, minWeightMagnitude :14} : {depth :3, minWeightMagnitude :9}
@@ -22,20 +23,20 @@ class App extends Component {
     }
   render() {
     let docMutated = this.props.docMutated
-    let title = 'Please fill the form'
-    let text = `Please fill the generated TX Hash (should be in your clipboard) and the Fetching Testing Address, if you don't have them yet, please go to Step 2`
-    let cssClass = 'message-box__info'
+    let title = `Let the Tangle validate it`
+    let validText = false
     if(docMutated === false) {
-      cssClass = 'message-box__danger'
-      title = 'Document not valid anymore'
-      text = `The calculated Hash didn't match with the saved one`
+      title = 'Document has been changed.'
     } else if(docMutated === true) {
-      cssClass = 'message-box__success'
       title = 'Document Valid!'
-      text = `The document hash haven't been mutated since its first signature with the Tangle.`
+      validText = true
     }
     return(<div>
-      <div className="button-container button-container__center">
+      <div>
+        <Title value={title} valid={validText} />
+        <p>Please fill the generated TX Hash (should be in your clipboard) and the Fetching Address, if you don't have them yet, please go to Step 2</p>
+      </div>
+      <div>
         <input className="button button--secondary"
                type="text"
                id="input"
@@ -46,7 +47,7 @@ class App extends Component {
                onChange={this.props.handleInputTextChange}
         />
       </div>
-      <div className="button-container button-container__center">
+      <div>
         <input className="button button--secondary"
                type="text"
                id="input"
@@ -57,12 +58,12 @@ class App extends Component {
                onChange={this.props.handleInputTextChange}
         />
       </div>
-       <div className="button-container button-container__center">
+       <div>
         <button className="button" onClick={this.props.verify}>Verify</button>
         <button className="button" onClick={this.props.reset}>Reset</button>
        </div>
        <br/>
-       <div className="button-container button-container__center">
+       {/*<div className="button-container button-container__center">
           <div className={`message-box ${cssClass}`} >
             <div className="message-box--icon"></div>
             <div className="message-box--text">
@@ -70,7 +71,8 @@ class App extends Component {
                <div className="message-box--content">{text}</div>
             </div>
           </div>
-      </div></div>)
+      </div>*/}
+      </div>)
   }
 }
 

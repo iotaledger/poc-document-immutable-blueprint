@@ -33,7 +33,10 @@ class SelectFile extends Component {
     return(<div>
 
       <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'center' }}>
-        <Title value={title} valid={validText} />
+        <Title
+          value={title}
+          valid={validText}
+        />
       </div>
 
       <div style={{ width: '100%', position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
