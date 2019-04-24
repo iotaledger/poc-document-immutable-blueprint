@@ -1,0 +1,59 @@
+import React, { Component } from 'react';
+import { verify, hash, publish } from 'iota-proof-tool'
+import nodes from './../nodes'
+import DropDown from './../Dropdown'
+
+const styles = {width: '360px'}
+
+function getProviderParams(isMainnet) {
+  return isMainnet ? {depth :3, minWeightMagnitude :14} : {depth :3, minWeightMagnitude :9}
+}
+
+class SelectNode extends Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    let everythingIsOk = (this.props.hashValue!='')
+    let title = 'Select your Node'
+    if(everythingIsOk === true) {
+      title = 'Node Selected'
+    }
+    return(<div>
+
+      <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'center' }}>
+        <span
+          style={{ fontSize: '64px', color: '#019792' }}
+          className="text">
+          {title}
+        </span>
+      </div>
+      {/*
+      <div style={{ width: '100%', position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
+        <SelectFileArea fileSelected={this.props.hashValue} />
+        <input style={{ height: '100%', fontSize:'100px', opacity: '0', position: 'absolute', left: '0', top: '0' }}
+               type="file"
+               id="input"
+               onChange={this.props.handleFileSet}
+        />
+      </div>
+      */}
+      <div>
+        <DropDown
+          nodes={nodes}
+          onProviderSelected={this.props.onProviderSelected}
+          styles={styles}
+          provider={this.props.provider}
+        />
+      </div>
+      {/*
+         <div style={{display: 'block', marginTop: '30px'}}>
+           <div><span className="text text--level2">Calculated Hash Value:</span></div>
+           <div>{this.props.hashValue}</div>
+         </div>*/}
+      </div>)
+  }
+}
+
+
+export default SelectNode

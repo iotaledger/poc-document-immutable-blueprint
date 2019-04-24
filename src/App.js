@@ -6,6 +6,7 @@ import DropDown from './Dropdown'
 import DocumentSignature from './partials/DocumentSignature'
 import DocumentVerification from './partials/DocumentVerification'
 import SelectFile from './partials/SelectFile'
+import SelectNode from './partials/SelectNode'
 import Header from './partials/header'
 import Loading from './partials/Loading'
 import Footer from './partials/footer'
@@ -154,6 +155,13 @@ class App extends Component {
           <div className="middle-column" style={{border: '1px solid blue'}}>
               {this.state.isLoading && <Loading />}
               <Route exact path="/" component={(match) => (<SelectFile
+                                                        handleFileSet={this.handleFileSet}
+                                                        onProviderSelected={this.onProviderSelected}
+                                                        hashValue={this.state.hashValue}
+                                                        provider={this.state.provider}
+                                                        setNextPage={this.setNextPage}
+                                                        />)} />
+              <Route exact path="/node" component={(match) => (<SelectNode
                                                         handleFileSet={this.handleFileSet}
                                                         onProviderSelected={this.onProviderSelected}
                                                         hashValue={this.state.hashValue}
