@@ -16,13 +16,16 @@ class Radio extends Component {
     this.handleRadio = this.handleRadio.bind(this)
   }
   handleRadio(e) {
-    this.setState( prevS => ({ checked: !prevS.checked }))
+    this.setState( prevS => {
+      this.props.handleRandioChange(!prevS.checked)
+      return { checked: !prevS.checked }
+    })
+
   }
 
   render() {
     return(<button style={{ border: 'none', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', outline: 0 }} onClick={this.handleRadio}>
       {this.state.checked ? <img src={radioChecked} /> : <img src={radioUnChecked} />}
-
       <span style={{ marginLeft: '10px' }}>{this.props.label}</span>
     </button>
 )

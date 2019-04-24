@@ -11,16 +11,16 @@ function getProviderParams(isMainnet) {
   return isMainnet ? {depth :3, minWeightMagnitude :14} : {depth :3, minWeightMagnitude :9}
 }
 
-class App extends Component {
+class SignDocument extends Component {
   constructor(props) {
     super(props)
     this.state = {
       useDefault: true
     }
-    this.handleCheckbox = this.handleCheckbox.bind(this)
+    this.handleRandioChange = this.handleRandioChange.bind(this)
   }
-  handleCheckbox(e) {
-    this.setState({ useDefault:  e.target.checked })
+  handleRandioChange(state) {
+    this.setState({ useDefault:  state })
   }
   render() {
     let isFormFilled = (this.props.pubAddress!='' && this.props.pubSeed!='')
@@ -58,7 +58,10 @@ class App extends Component {
       </div>
 
       <div className="button-container button-container__center">
-          <Radio label="Use the default Address and Seed" />
+          <Radio
+            label="Use the default Address and Seed"
+            handleRandioChange={this.handleRandioChange}
+          />
               {/*<input type="checkbox" checked={this.state.useDefault} onClick={this.handleCheckbox}/>*/}
       </div>
 
@@ -102,4 +105,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default SignDocument
