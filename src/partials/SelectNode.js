@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { verify, hash, publish } from 'iota-proof-tool'
 import nodes from './../nodes'
 import DropDown from './../Dropdown'
+import Title from './title'
 
 const styles = {width: '360px'}
 
@@ -22,11 +23,7 @@ class SelectNode extends Component {
     return(<div>
 
       <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'center' }}>
-        <span
-          style={{ fontSize: '64px', color: '#019792' }}
-          className="text">
-          {title}
-        </span>
+        <Title value={title} />
       </div>
       <p>A node is the first receiver of your transaction, it will be later broadcasted to its neighbours</p>
       <DropDown

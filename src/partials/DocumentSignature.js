@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { verify, hash, publish } from 'iota-proof-tool'
 import { dSeed, dAddress } from './defaults'
 import Radio from './radio'
+import Title from './title'
 // import nodes from './nodes'
 // import DropDown from './Dropdown'
 
@@ -23,6 +24,14 @@ class SignDocument extends Component {
     }
     this.handleRandioChange = this.handleRandioChange.bind(this)
     this.handleInputTextChange = this.handleInputTextChange.bind(this)
+    this.signDocument = this.signDocument.bind(this)
+  }
+  signDocument(pubAddress, pubSeed) {
+    if(this.state.useDefault) {
+      this.props.signDocument(dAddress, dSeed)
+    } else {
+      this.props.signDocument(pubAddress, pubSeed)
+    }
   }
   handleRandioChange(state, name) {
     this.setState({ useDefault: ((name === 'userdata') ? false : state), name })
@@ -39,13 +48,14 @@ class SignDocument extends Component {
     }
   }
   render() {
-    let isFormFilled = (this.props.pubAddress!='' && this.props.pubSeed!='')
-    let isFormatValid = isFormFilled
-    let everythingIsOk = isFormatValid && isFormFilled
+    let generatedHash = this.props.genTxHash!=''
     let seedLink =  <a target="_blank" href='https://ipfs.io/ipfs/QmdqTgEdyKVQAVnfT5iV4ULzTbkV4hhkDkMqGBuot8egfA'>here (SEED)</a>
     let AddLink =  <a target="_blank" href='https://people.dsv.su.se/~haughey/iota-offline/iota-offline-address-generator.html'>here (ADDRESS)</a>
-    let title = 'Please fill the form'
-    let text = (<div className="message-box--content">{`Please generate a TESTING Seed and Address from`} {seedLink} and {AddLink}. <br />
+    let title = 'Generate your TX Hash'
+    if(generatedHash) {
+      title = 'TX Hash Generated'
+    }
+    /*let text = (<div className="message-box--content">{`Please generate a TESTING Seed and Address from`} {seedLink} and {AddLink}. <br />
     {`- Do NOT use your real SEED/ADDRESS! Once the Document is signed and you get TX hash, no one can mutate or re-sign that document, even though they got your SEED/ADDRESS.`} <br />
     {`- Using different ADDRESSES is recommended to separate documents by type or category, so only ADDRESS and TX Hash is needed to retrieve the document hash`} <br />
     </div>)
@@ -58,20 +68,11 @@ class SignDocument extends Component {
       cssClass = 'message-box__success'
       title = 'Form Filled'
       text = <div className="message-box--content">{`Form has been filled, please press 'Sign the document', this will send the signature to the Tangle.`}</div>
-    }
-    const defaultSelected = () => ((this.state.useDefault && this.state.name === 'default') || this.state.useDefault === false)
+    }*/
     return(<div>
-
-      <div style={{ margin: '30px 0'}} className="button-container button-container__center">
-         <div className="button-container button-container__center">
-             <div className={`message-box ${cssClass}`} >
-               <div className="message-box--icon"></div>
-               <div className="message-box--text">
-                  <div className="message-box--title">{title}</div>
-                  {text}
-               </div>
-             </div>
-         </div>
+      <div>
+        <Title value={title} />
+        <p>This is a very long desciption to be incorporated here, to be written in the future</p>
       </div>
 
       <div style={topMargin}>
@@ -122,10 +123,10 @@ class SignDocument extends Component {
       <div style={topMargin}>
          <button
           className="button"
-          onClick={e => this.props.signDocument(this.state.pubAddress, this.state.pubSeed)}>
+          onClick={e => this.signDocument(this.state.pubAddress, this.state.pubSeed)}>
           Sign the document
          </button>
-         
+
          <button
           className="button"
           onClick={this.props.reset}>
