@@ -4,7 +4,7 @@ import nodes from './../nodes'
 import DropDown from './../Dropdown'
 import Title from './title'
 
-const styles = {width: '360px'}
+const styles = { width: '100%' }
 
 function getProviderParams(isMainnet) {
   return isMainnet ? {depth :3, minWeightMagnitude :14} : {depth :3, minWeightMagnitude :9}
