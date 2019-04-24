@@ -8,6 +8,8 @@ class Header extends Component {
   }
   render() {
     const currScrData = navMap.get(this.props.currPath)
+    const keys = Array.from(navMap.keys())
+
     return (<div>
       <header className="sticky-header">
         <img className="sticky-header__brand" src="assets/Logo.svg" />
@@ -16,14 +18,12 @@ class Header extends Component {
         </div>
       </header>
       <div className="step-progress-bar">
-        <div className="step-progress-bar-item step-progress-bar-item--visited">
-        </div>
-        <div className="step-progress-bar-item step-progress-bar-item--visited">
-        </div>
-        <div className="step-progress-bar-item step-progress-bar-item--visited">
-        </div>
-        <div className="step-progress-bar-item">
-        </div>
+        {keys.map((key, indx) => (
+          <div
+            key={key}
+            className={`step-progress-bar-item ${indx <= currScrData.pageN ? 'step-progress-bar-item--visited' : ''}`}
+          />
+        ))}
       </div>
   </div>)
   }
