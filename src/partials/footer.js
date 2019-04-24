@@ -13,10 +13,17 @@ class Footer extends Component {
 
     changeLocation(forward) {
       const currPath = window.location.pathname
+      const routeTriggerCallback = (e) => this.props.triggerRouteChange(this.state)
       if(forward) {
-        this.setState({ currPath: navMap.get(currPath).next ?  navMap.get(currPath).next : navMap.get(currPath).curP })
+        this.setState({
+                        currPath: navMap.get(currPath).next ?
+                        navMap.get(currPath).next :
+                        navMap.get(currPath).curP }, routeTriggerCallback)
       } else {
-        this.setState({ currPath: navMap.get(currPath).prev ? navMap.get(currPath).prev : navMap.get(currPath).curP })
+        this.setState({
+                        currPath: navMap.get(currPath).prev ?
+                        navMap.get(currPath).prev :
+                        navMap.get(currPath).curP }, routeTriggerCallback)
       }
     }
 

@@ -5,21 +5,9 @@ import { navMap } from './defaults'
 class Header extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      currPath: window.location.pathname
-    }
-    this.changeLocation = this.changeLocation.bind(this)
-  }
-  changeLocation(forward) {
-    const currPath = window.location.pathname
-    if(forward) {
-      this.setState({ currPath: navMap.get(currPath).next ?  navMap.get(currPath).next : navMap.get(currPath).curP })
-    } else {
-      this.setState({ currPath: navMap.get(currPath).prev ? navMap.get(currPath).prev : navMap.get(currPath).curP })
-    }
   }
   render() {
-    const currScrData = navMap.get(this.state.currPath)
+    const currScrData = navMap.get(this.props.currPath)
     return (<div>
       <header className="sticky-header">
         <img className="sticky-header__brand" src="assets/Logo.svg" />

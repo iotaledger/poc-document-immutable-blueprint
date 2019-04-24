@@ -22,7 +22,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      pathname: window.location.pathname,
+      currPath: '/',
       pageTitle: 'No Title?',
       file: null,
       transactionHash: '',
@@ -41,6 +41,10 @@ class App extends Component {
     this.onProviderSelected = this.onProviderSelected.bind(this)
     this.signDocument = this.signDocument.bind(this)
     this.setTitle = this.setTitle.bind(this)
+    this.triggerRouteChange = this.triggerRouteChange.bind(this)
+  }
+  triggerRouteChange(childState) {
+    this.setState({ currPath: childState.currPath })
   }
   setTitle(title) {
     this.setState({
@@ -131,8 +135,8 @@ class App extends Component {
         <Router>
         <Header
           pageTitle={this.state.pageTitle}
-          location={this.state.pathname}
           enableNextPage={this.state.enableNextPage}
+          currPath={this.state.currPath}
         />
         <div className="layouts--search">
           <div className="middle-column">
@@ -172,7 +176,7 @@ class App extends Component {
 
             </div>
           </div>
-          <Footer />
+          <Footer triggerRouteChange={this.triggerRouteChange} />
         </Router>
       );
   }
