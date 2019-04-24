@@ -10,22 +10,15 @@ const radioSize = { width: '25px', height: '25px' }
 class Radio extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      checked: true
-    }
     this.handleRadio = this.handleRadio.bind(this)
   }
   handleRadio(e) {
-    this.setState( prevS => {
-      this.props.handleRandioChange(!prevS.checked)
-      return { checked: !prevS.checked }
-    })
-
+    this.props.handleRandioChange(!this.props.checked, this.props.name)
   }
 
   render() {
     return(<button style={{ border: 'none', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', outline: 0 }} onClick={this.handleRadio}>
-      {this.state.checked ? <img src={radioChecked} /> : <img src={radioUnChecked} />}
+      {this.props.checked ? <img src={radioChecked} /> : <img src={radioUnChecked} />}
       <span style={{ marginLeft: '10px' }}>{this.props.label}</span>
     </button>
 )

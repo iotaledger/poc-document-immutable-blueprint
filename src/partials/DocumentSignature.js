@@ -5,7 +5,8 @@ import Radio from './radio'
 // import nodes from './nodes'
 // import DropDown from './Dropdown'
 
-const styles = {width: '360px'}
+const styles = { width: '100%' }
+const topMargin = { marginTop: '30px' }
 
 function getProviderParams(isMainnet) {
   return isMainnet ? {depth :3, minWeightMagnitude :14} : {depth :3, minWeightMagnitude :9}
@@ -15,12 +16,27 @@ class SignDocument extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      useDefault: true
+      useDefault: true,
+      name: 'default',
+      pubAddress: '',
+      pubSeed: ''
     }
     this.handleRandioChange = this.handleRandioChange.bind(this)
+    this.handleInputTextChange = this.handleInputTextChange.bind(this)
   }
-  handleRandioChange(state) {
-    this.setState({ useDefault:  state })
+  handleRandioChange(state, name) {
+    this.setState({ useDefault: ((name === 'userdata') ? false : state), name })
+  }
+  handleInputTextChange(e) {
+   if(e.target.name === 'pubAddress') {
+      this.setState({
+        pubAddress: e.target.value
+      })
+    } else if(e.target.name === 'pubSeed') {
+      this.setState({
+        pubSeed: e.target.value
+      })
+    }
   }
   render() {
     let isFormFilled = (this.props.pubAddress!='' && this.props.pubSeed!='')
@@ -43,6 +59,7 @@ class SignDocument extends Component {
       title = 'Form Filled'
       text = <div className="message-box--content">{`Form has been filled, please press 'Sign the document', this will send the signature to the Tangle.`}</div>
     }
+    const defaultSelected = () => ((this.state.useDefault && this.state.name === 'default') || this.state.useDefault === false)
     return(<div>
 
       <div style={{ margin: '30px 0'}} className="button-container button-container__center">
@@ -57,15 +74,17 @@ class SignDocument extends Component {
          </div>
       </div>
 
-      <div className="button-container button-container__center">
-          <Radio
-            label="Use the default Address and Seed"
-            handleRandioChange={this.handleRandioChange}
-          />
-              {/*<input type="checkbox" checked={this.state.useDefault} onClick={this.handleCheckbox}/>*/}
-      </div>
+      <div style={topMargin}>
+        <Radio
+          label="Use the default Address and Seed (faster)"
+          handleRandioChange={this.handleRandioChange}
 
-      <div className="button-container button-container__center">
+          name="default"
+          checked={this.state.useDefault}
+        />
+      </div>
+      <div style={topMargin}>
+        <label style={{marginLeft: '10px'}}>Address</label>
         <input className="button button--secondary"
                type="text"
                id="input"
@@ -73,11 +92,12 @@ class SignDocument extends Component {
                style={styles}
                disabled={this.state.useDefault}
                placeholder="Publish Address"
-               value={this.state.useDefault? dAddress : this.props.pubAddress}
-               onChange={this.props.handleInputTextChange}
+               value={this.state.useDefault? dAddress : this.state.pubAddress}
+               onChange={this.handleInputTextChange}
         />
       </div>
-      <div className="button-container button-container__center">
+      <div style={topMargin}>
+        <label style={{marginLeft: '10px'}}>Seed</label>
         <input className="button button--secondary"
                type="text"
                id="input"
@@ -85,23 +105,35 @@ class SignDocument extends Component {
                style={styles}
                disabled={this.state.useDefault}
                placeholder="Seed"
-               value={this.state.useDefault? dSeed : this.props.pubSeed}
-               onChange={this.props.handleInputTextChange}
+               value={this.state.useDefault? dSeed : this.state.pubSeed}
+               onChange={this.handleInputTextChange}
         />
       </div>
-      <div className="button-container button-container__center">
+
+      <div style={topMargin}>
+        <Radio
+          label="Use my own Address and Seed"
+          handleRandioChange={this.handleRandioChange}
+          name="userdata"
+          checked={(this.state.useDefault === false) && this.state.name === 'userdata'}
+        />
+      </div>
+
+      <div style={topMargin}>
        <button className="button" onClick={this.props.signDocument}>Sign the document</button>
        <button className="button" onClick={this.props.reset}>Clear</button>
       </div>
 
-      <div className="button-container button-container__center">
+      {/*<div className="button-container button-container__center">
          <div style={{display: 'block'}}>
            <div><span className="text text--level2">Calculated Hash Value:</span></div>
            <div>{this.props.hashValue}</div>
            <div><span className="text text--level2">Generated TX Hash:</span></div>
            <div>{this.props.genTxHash}</div>
          </div>
-      </div></div>)
+      </div>*/}
+
+      </div>)
   }
 }
 
