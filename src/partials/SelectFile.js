@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { verify, hash, publish } from 'iota-proof-tool'
 import nodes from './../nodes'
 import DropDown from './../Dropdown'
+import Title from './title'
 
 const styles = {width: '360px'}
 
@@ -24,17 +25,15 @@ class SelectFile extends Component {
   render() {
     let everythingIsOk = (this.props.hashValue!='')
     let title = 'Select your file'
+    let validText = false
     if(everythingIsOk === true) {
       title = 'File Selected'
+       validText = true
     }
     return(<div>
 
       <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'center' }}>
-        <span
-          style={{ fontSize: '64px', color: '#019792' }}
-          className="text">
-          {title}
-        </span>
+        <Title value={title} valid={validText} />
       </div>
 
       <div style={{ width: '100%', position: 'relative', overflow: 'hidden', display: 'inline-block' }}>

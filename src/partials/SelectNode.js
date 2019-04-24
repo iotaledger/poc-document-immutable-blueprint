@@ -15,15 +15,17 @@ class SelectNode extends Component {
     super(props)
   }
   render() {
-    let everythingIsOk = (this.props.hashValue!='')
+    let everythingIsOk = (this.props.provider!='')
     let title = 'Select your Node'
+    let validText = false
     if(everythingIsOk === true) {
       title = 'Node Selected'
+      validText = true
     }
     return(<div>
 
       <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'center' }}>
-        <Title value={title} />
+        <Title value={title} valid={validText} />
       </div>
       <p>A node is the first receiver of your transaction, it will be later broadcasted to its neighbours</p>
       <DropDown
