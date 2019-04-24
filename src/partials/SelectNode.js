@@ -28,29 +28,13 @@ class SelectNode extends Component {
           {title}
         </span>
       </div>
-      {/*
-      <div style={{ width: '100%', position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
-        <SelectFileArea fileSelected={this.props.hashValue} />
-        <input style={{ height: '100%', fontSize:'100px', opacity: '0', position: 'absolute', left: '0', top: '0' }}
-               type="file"
-               id="input"
-               onChange={this.props.handleFileSet}
-        />
-      </div>
-      */}
-      <div>
-        <DropDown
-          nodes={nodes}
-          onProviderSelected={this.props.onProviderSelected}
-          styles={styles}
-          provider={this.props.provider}
-        />
-      </div>
-      {/*
-         <div style={{display: 'block', marginTop: '30px'}}>
-           <div><span className="text text--level2">Calculated Hash Value:</span></div>
-           <div>{this.props.hashValue}</div>
-         </div>*/}
+      <p>A node is the first receiver of your transaction, it will be later broadcasted to its neighbours</p>
+      <DropDown
+        nodes={nodes}
+        onProviderSelected={this.props.onProviderSelected}
+        styles={styles}
+        provider={this.props.provider}
+      />
       </div>)
   }
 }
