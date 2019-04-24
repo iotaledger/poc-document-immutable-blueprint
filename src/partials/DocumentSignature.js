@@ -120,8 +120,17 @@ class SignDocument extends Component {
       </div>
 
       <div style={topMargin}>
-       <button className="button" onClick={this.props.signDocument}>Sign the document</button>
-       <button className="button" onClick={this.props.reset}>Clear</button>
+         <button
+          className="button"
+          onClick={e => this.props.signDocument(this.state.pubAddress, this.state.pubSeed)}>
+          Sign the document
+         </button>
+         
+         <button
+          className="button"
+          onClick={this.props.reset}>
+          Clear
+        </button>
       </div>
 
       {/*<div className="button-container button-container__center">

@@ -23,8 +23,6 @@ class App extends Component {
     super(props)
     this.state = {
       pathname: window.location.pathname,
-      pubSeed: dSeed,
-      pubAddress: dAddress,
       pageTitle: 'No Title?',
       file: null,
       transactionHash: '',
@@ -64,22 +62,12 @@ class App extends Component {
       this.setState({
         address: e.target.value
       })
-    } else if(e.target.name === 'pubAddress') {
-      this.setState({
-        pubAddress: e.target.value
-      })
-    } else if(e.target.name === 'pubSeed') {
-      this.setState({
-        pubSeed: e.target.value
-      })
     }
   }
-  signDocument(e) {
+  signDocument(address, seed) {
     this.setState({ isLoading: true })
     const provider = this.state.provider
     const data = this.state.hashValue
-    const address = this.state.pubAddress
-    const seed = this.state.pubSeed
     const { depth, minWeightMagnitude } = getProviderParams(this.state.isMainnet)
     publish({
       provider,
