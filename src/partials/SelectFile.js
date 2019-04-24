@@ -47,14 +47,6 @@ class SelectFile extends Component {
                onChange={this.props.handleFileSet}
         />
       </div>
-      {/*<div className="button-container button-container__center">
-        <DropDown
-          nodes={nodes}
-          onProviderSelected={this.props.onProviderSelected}
-          styles={styles}
-          provider={this.props.provider}
-        />
-      </div>*/}
          <div style={{display: 'block', marginTop: '30px'}}>
            <div><span className="text text--level2">Calculated Hash Value:</span></div>
            <div>{this.props.hashValue}</div>

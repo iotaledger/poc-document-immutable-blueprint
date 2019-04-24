@@ -3,8 +3,6 @@ import { verify, hash, publish } from 'iota-proof-tool'
 import { dSeed, dAddress } from './defaults'
 import Radio from './radio'
 import Title from './title'
-// import nodes from './nodes'
-// import DropDown from './Dropdown'
 
 const styles = { width: '100%' }
 const topMargin = { marginTop: '30px' }
@@ -131,14 +129,6 @@ class SignDocument extends Component {
           </button>
         </div>
       </section>}
-      {/*<div className="button-container button-container__center">
-         <div style={{display: 'block'}}>
-           <div><span className="text text--level2">Calculated Hash Value:</span></div>
-           <div>{this.props.hashValue}</div>
-           <div><span className="text text--level2">Generated TX Hash:</span></div>
-           <div>{this.props.genTxHash}</div>
-         </div>
-      </div>*/}
 
       </div>)
   }

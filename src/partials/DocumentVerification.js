@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { verify, hash, publish } from 'iota-proof-tool'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Title from './title'
-// import nodes from './nodes'
-// import DropDown from './Dropdown'
 
 const styles = { width: '100%' }
 
@@ -20,7 +18,6 @@ class App extends Component {
       provider: '',
       verifyAnother: false
     }
-    // this.handleFileSet = this.handleFileSet.bind(this)
      this.verifyAnother = this.verifyAnother.bind(this)
     }
   verifyAnother(e) {
