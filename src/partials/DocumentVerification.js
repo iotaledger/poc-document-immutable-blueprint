@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { verify, hash, publish } from 'iota-proof-tool'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Title from './title'
 // import nodes from './nodes'
 // import DropDown from './Dropdown'
 
-const styles = {width: '100%'}
+const styles = { width: '100%' }
 
 function getProviderParams(isMainnet) {
   return isMainnet ? {depth :3, minWeightMagnitude :14} : {depth :3, minWeightMagnitude :9}
@@ -16,14 +17,19 @@ class App extends Component {
     this.state = {
       file: null,
       transactionHash: '',
-      provider: ''
+      provider: '',
+      verifyAnother: false
     }
     // this.handleFileSet = this.handleFileSet.bind(this)
-    // this.verify = this.verify.bind(this)
+     this.verifyAnother = this.verifyAnother.bind(this)
     }
+  verifyAnother(e) {
+    this.setState({ verifyAnother: true })
+  }
   render() {
     let docMutated = this.props.docMutated
-    let title = `Let the Tangle validate it`
+    docMutated = this.state.verifyAnother ? '' : docMutated
+    let title = ''
     let text = ''
     let validText = false
     if(docMutated === false) {
@@ -33,11 +39,14 @@ class App extends Component {
       title = 'Document Valid!'
       text = 'Tangle Signature valid.'
       validText = true
+    } else {
+      title = 'Let the Tangle validate it'
+      text =  "Please fill the generated TX Hash (should be in your clipboard) and the Fetching Address, if you don't have them yet, please go to Step 2"
     }
+
     return(<div>
       <div>
         <Title value={title} valid={validText} />
-        {!docMutated && <p>{text}</p>}
       </div>
 
       {docMutated && <div style={{ marginTop: '40px' }} className="message-box message-box__success">
@@ -49,8 +58,13 @@ class App extends Component {
           </div>
         </div>
       </div>}
+
+      {docMutated && <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'space-between' }} >
+        <a onClick={this.verifyAnother}>Verify another document</a>
+        <a href={`${window.location.origin}/`}>Start over again</a>
+      </div>}
       {!docMutated &&<section>
-         <p>Please fill the generated TX Hash (should be in your clipboard) and the Fetching Address, if you don't have them yet, please go to Step 2</p>
+         <p>{text}</p>
          <div>
             <input className="button button--secondary"
                    type="text"

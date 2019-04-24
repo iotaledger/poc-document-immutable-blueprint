@@ -60,11 +60,14 @@ class SignDocument extends Component {
         <Title value={title} valid={generatedHash} />
       </div>
       <div style={{ marginTop: '35px' }}>
-        {generatedHash && <Title
-                            value={this.props.genTxHash}
-                            valid={false}
-                            style={{ fontSize: '32px', wordBreak: 'break-word' }}
-                          />}
+        {generatedHash && <div>
+                            <Title
+                              value={this.props.genTxHash}
+                              valid={false}
+                              style={{ fontSize: '32px', wordBreak: 'break-word' }}
+                            />
+                            <p>The TX Hash already copied in clipboard, please press 'Continue'</p>
+                           </div>}
 
       </div>
       {!generatedHash && <section>
