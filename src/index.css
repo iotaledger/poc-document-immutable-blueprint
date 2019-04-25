@@ -2,3 +2,30 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.step-progress-bar-item--visited {
+  animation-name: light;
+  animation-duration: 1s;
+}
+
+@keyframes light {
+  from {background-color: #c4c4c4;}
+  to {background-color: #603f98;}
+}
+
+
+*:not(input):not(button) {
+  animation-duration: 0.5s;
+  animation-name: slidein;
+}
+
+
+@keyframes slidein {
+  from {
+    opacity: 0.7;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
