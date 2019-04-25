@@ -14,7 +14,7 @@ function SelectFileArea(p) {
   return (<div style={{cursor: 'pointer'}} className={`file-upload ${p.fileSelected ? 'file-upload--selected' : ''}`}>
     <div className="file-upload__icon icon-file-upload" style={{alignItems: 'center'}}></div>
     <span className="file-upload__text">{p.fileSelected ? 'file selected' : 'Select File to be hashed'}</span>
-    <span className="file-upload__text-filename">{p.fileSelected ? 'mySample.doc' : ''}</span>
+    <span className="file-upload__text-filename">{p.fileSelected ? p.filename : ''}</span>
   </div>)
 }
 
@@ -40,7 +40,7 @@ class SelectFile extends Component {
       </div>
 
       <div style={{ width: '100%', position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
-        <SelectFileArea fileSelected={this.props.hashValue} />
+        <SelectFileArea fileSelected={this.props.hashValue} {...this.props} />
         <input style={{ height: '100%', fontSize:'100px', opacity: '0', position: 'absolute', left: '0', top: '0' }}
                type="file"
                id="input"

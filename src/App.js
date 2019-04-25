@@ -32,7 +32,8 @@ class App extends Component {
       hashValue: '',
       genTxHash: '',
       genChannelAddress: '',
-      isLoading: false
+      isLoading: false,
+      filename: ''
     }
     this.handleFileSet = this.handleFileSet.bind(this)
     this.verify = this.verify.bind(this)
@@ -120,7 +121,7 @@ class App extends Component {
   }
   handleFileSet(e) {
     const file = e.target.files[0]
-    this.setState({file})
+    this.setState({file, filename: file.name})
     const reader = new FileReader();
     reader.addEventListener("loadend", () => {
        const file = reader.result
@@ -142,6 +143,7 @@ class App extends Component {
           <div className="middle-column">
               {this.state.isLoading && <Loader />}
               <Route exact path="/" component={(match) => (<SelectFile
+                                                        filename={this.state.filename}
                                                         handleFileSet={this.handleFileSet}
                                                         onProviderSelected={this.onProviderSelected}
                                                         hashValue={this.state.hashValue}
