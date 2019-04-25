@@ -8,7 +8,7 @@ import DocumentVerification from './partials/DocumentVerification'
 import SelectFile from './partials/SelectFile'
 import SelectNode from './partials/SelectNode'
 import Header from './partials/header'
-import Loading from './partials/Loading'
+import Loader from './partials/loader'
 import Footer from './partials/footer'
 import { dSeed, dAddress } from './partials/defaults'
 
@@ -140,7 +140,7 @@ class App extends Component {
         />
         <div className="layouts--search">
           <div className="middle-column">
-              {this.state.isLoading && <Loading />}
+              {this.state.isLoading && <Loader />}
               <Route exact path="/" component={(match) => (<SelectFile
                                                         handleFileSet={this.handleFileSet}
                                                         onProviderSelected={this.onProviderSelected}
