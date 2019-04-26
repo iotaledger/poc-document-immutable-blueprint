@@ -38,7 +38,6 @@ class App extends Component {
     this.handleFileSet = this.handleFileSet.bind(this)
     this.verify = this.verify.bind(this)
     this.reset = this.reset.bind(this)
-    this.handleInputTextChange = this.handleInputTextChange.bind(this)
     this.onProviderSelected = this.onProviderSelected.bind(this)
     this.signDocument = this.signDocument.bind(this)
     this.setTitle = this.setTitle.bind(this)
@@ -58,17 +57,7 @@ class App extends Component {
       isMainnet
     })
   }
-  handleInputTextChange(e) {
-    if(e.target.name === 'txhash') {
-      this.setState({
-        transactionHash: e.target.value
-      })
-    } else if(e.target.name === 'address') {
-      this.setState({
-        address: e.target.value
-      })
-    }
-  }
+
   signDocument(address, seed) {
     this.setState({ isLoading: true })
     const provider = this.state.provider
@@ -95,7 +84,7 @@ class App extends Component {
 
     })
   }
-  verify(e) {
+  verify(address, transactionHash) {
     this.setState({
       isLoading: true
     })
@@ -103,8 +92,8 @@ class App extends Component {
     reader.addEventListener("loadend", () => {
        const file = reader.result
        const bundle = {
-         address: this.state.address,
-         hash: this.state.transactionHash,
+         address: address,
+         hash: transactionHash,
          provider: this.state.provider
        }
        verify(

@@ -15,13 +15,26 @@ class App extends Component {
     this.state = {
       file: null,
       transactionHash: '',
+      address: '',
       provider: '',
       verifyAnother: false
     }
      this.verifyAnother = this.verifyAnother.bind(this)
+     this.handleInputTextChange = this.handleInputTextChange.bind(this)
     }
   verifyAnother(e) {
     this.setState({ verifyAnother: true })
+  }
+  handleInputTextChange(e) {
+    if(e.target.name === 'txhash') {
+      this.setState({
+        transactionHash: e.target.value
+      })
+    } else if(e.target.name === 'address') {
+      this.setState({
+        address: e.target.value
+      })
+    }
   }
   render() {
     let docMutated = this.props.docMutated
@@ -40,7 +53,7 @@ class App extends Component {
       title = 'Let the Tangle validate it'
       text =  "Please fill the generated TX Hash (should be in your clipboard) and the Fetching Address, if you don't have them yet, please go to Step 2"
     }
-
+    const { address, transactionHash } = this.state
     return(<div>
       <div>
         <Title value={title} valid={validText} />
@@ -69,8 +82,8 @@ class App extends Component {
                    name="txhash"
                    style={styles}
                    placeholder="TX Hash"
-                   value={this.props.transactionHash}
-                   onChange={this.props.handleInputTextChange}
+                   value={this.state.transactionHash}
+                   onChange={this.handleInputTextChange}
             />
          </div>
          <div>
@@ -80,12 +93,12 @@ class App extends Component {
                    name="address"
                    style={styles}
                    placeholder="Fetch Address"
-                   value={this.props.address}
-                   onChange={this.props.handleInputTextChange}
+                   value={this.state.address}
+                   onChange={this.handleInputTextChange}
             />
          </div>
          <div>
-            <button className="button" onClick={this.props.verify}>Verify</button>
+            <button className="button" onClick={e => this.props.verify(address, transactionHash)}>Verify</button>
             <button className="button" onClick={this.props.reset}>Reset</button>
          </div>
        </section>}
