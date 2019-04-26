@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { verify, hash, publish } from 'iota-proof-tool'
+import { verify, hash, publish } from 'signature-validation-tool'
 import nodes from './../nodes'
 import DropDown from './../Dropdown'
 import Title from './title'

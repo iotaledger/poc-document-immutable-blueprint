@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "iota-css-theme": "git+https://github.com/iotaledger/iota-css-theme.git",
-    "iota-proof-tool": "^1.1.0",
+    "iota-proof-tool": "git+https://github.com/iotaledger/signature-validation-tool.git",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-router-dom": "^5.0.0",

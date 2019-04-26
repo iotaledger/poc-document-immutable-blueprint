@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { verify, hash, publish } from 'iota-proof-tool'
+import { verify, hash, publish } from 'signature-validation-tool'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodes from './nodes'
 import DropDown from './Dropdown'
@@ -60,6 +60,13 @@ class App extends Component {
   }
 
   signDocument(address, seed) {
+    const isValid = validateData(address,
+                     seed,
+                     this.state.provider,
+                     this.state.file)
+    if(!isValid) {
+      return
+    }
     this.setState({ isLoading: true })
     const provider = this.state.provider
     const data = this.state.hashValue
@@ -97,19 +104,21 @@ class App extends Component {
       isLoading: true
     })
     const reader = new FileReader();
-    reader.addEventListener("loadend", () => {
+    reader.addEventListener("loadend", async () => {
        const file = reader.result
        const bundle = {
          address: address,
          hash: transactionHash,
          provider: this.state.provider
        }
-       verify(
-              bundle,
-              true,
-              file,
-              (verified) => this.setState({ isLoading: false, docMutated: verified })
-             )
+       try {
+         const verified = await verify(bundle, true, file)
+         this.setState({ isLoading: false, docMutated: verified })
+       } catch(e) {
+         console.log(e)
+         this.setState({ isLoading: false, docMutated: false })
+       }
+
     });
     reader.readAsArrayBuffer(this.state.file);
   }
