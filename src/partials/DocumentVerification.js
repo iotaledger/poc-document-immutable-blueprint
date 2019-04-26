@@ -98,7 +98,7 @@ class App extends Component {
             />
          </div>
          <div>
-            <button className="button" onClick={e => this.props.verify(address, transactionHash)}>Verify</button>
+            <button className="button" onClick={e => this.props.verify(address, transactionHash, this.props.history.push)}>Verify</button>
             <button className="button" onClick={this.props.reset}>Reset</button>
          </div>
        </section>}

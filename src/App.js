@@ -11,6 +11,7 @@ import Header from './partials/header'
 import Loader from './partials/loader'
 import Footer from './partials/footer'
 import { dSeed, dAddress } from './partials/defaults'
+import { isValidTrytes, validateData } from './partials/utils'
 
 const styles = {width: '360px'}
 
@@ -84,7 +85,14 @@ class App extends Component {
 
     })
   }
-  verify(address, transactionHash) {
+  verify(address, transactionHash, navigate) {
+    const isValid = validateData(address,
+                 transactionHash,
+                 this.state.provider,
+                 this.state.file)
+    if(!isValid) {
+      return
+    }
     this.setState({
       isLoading: true
     })
@@ -155,7 +163,8 @@ class App extends Component {
                                                       genTxHash={this.state.genTxHash}
                                                       setNextPage={this.setNextPage}
                                                       />)} />
-              <Route path="/verif" component={() => (<DocumentVerification
+              <Route path="/verif" component={({ history }) => (<DocumentVerification
+                                                        history={history}
                                                         transactionHash={this.state.transactionHash}
                                                         handleInputTextChange={this.handleInputTextChange}
                                                         address={this.state.address}
