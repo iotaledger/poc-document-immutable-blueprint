@@ -30,7 +30,7 @@ class Footer extends Component {
     render() {
       const currScrData = navMap.get(this.state.currPath)
       return (<div style={{ margin: '30px 0'}}>
-      <div className="button-container" style={{ justifyContent: 'space-between', position: 'fixed', bottom: '0px', padding: '53px' }}>
+      <div className="button-container">
 
         <Link to={`${currScrData.prev ? currScrData.prev : currScrData.curP}`}>
           <button

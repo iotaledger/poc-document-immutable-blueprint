@@ -3,13 +3,28 @@ body {
   padding: 0;
 }
 
-@media (max-width: 767px) {
+
+/*
+  {  }
+*/
+@media (max-width: 515px) {
   .sticky-header {
       height: 250px;
       align-items: flex-end;
   }
   .sticky-header__control > h1 {
     align-self: flex-end;
+  }
+  .button-container {
+    flex-direction: column-reverse;
+  }
+}
+@media (min-width: 516px) {
+  .button-container {
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0px;
+    padding: 53px;
   }
 }
 
