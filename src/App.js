@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { verify, hash, publish } from 'iota-proof-tool'
+import { verify, hash, publish } from 'iota-poex-tool'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodes from './nodes'
 import DropDown from './Dropdown'
@@ -59,7 +59,7 @@ class App extends Component {
     })
   }
 
-  signDocument(address, seed) {
+  async signDocument(address, seed) {
     const isValid = validateData(address,
                      seed,
                      this.state.provider,
@@ -71,14 +71,15 @@ class App extends Component {
     const provider = this.state.provider
     const data = this.state.hashValue
     const { depth, minWeightMagnitude } = getProviderParams(this.state.isMainnet)
-    publish({
-      provider,
-      data,
-      address,
-      seed,
-      depth,
-      minWeightMagnitude
-    }, (retArr) => {
+    try {
+      const retArr = await publish({
+        provider,
+        data,
+        address,
+        seed,
+        depth,
+        minWeightMagnitude
+      })
       navigator.clipboard.writeText(retArr[0].hash).then(() => {
         /* clipboard successfully set */
         this.setState({
@@ -90,7 +91,11 @@ class App extends Component {
         alert('clipboard not supported, please copy manually the generated TX Hash')
       });
 
-    })
+    } catch(e) {
+      alert(`could not establish connection to this node
+        ${this.state.provider}, please choose a working
+        node and try again!`)
+    }
   }
   verify(address, transactionHash, navigate) {
     const isValid = validateData(address,
