@@ -6,6 +6,10 @@ function isValidTrytes(str) {
   return isValid
 }
 
+function redirectTo(url) {
+  return window.location.replace(`${window.location.origin}${url}`);
+}
+
 function validateData(address, transactionHash, provider, file, cb) {
   let isValid = true
   if(!isValidTrytes(address) || !isValidTrytes(transactionHash)) {
@@ -14,12 +18,12 @@ function validateData(address, transactionHash, provider, file, cb) {
   }
   if(provider=='' && isValid) {
     alert('Looks like the Node is not yet selected, please go and select your node! you are going to be redirected to start fresh again')
-    window.location.replace(`${window.location.origin}/`);
+    redirectTo('/')
     isValid = false
   }
   if(file==null && isValid) {
     alert('Looks like the File is not set, please set your file to be valdiated! you are going to be redirected to start fresh again')
-    window.location.replace(`${window.location.origin}/`);
+    redirectTo('/')
     isValid = false
   }
   return isValid
@@ -27,5 +31,6 @@ function validateData(address, transactionHash, provider, file, cb) {
 
 export {
   isValidTrytes,
-  validateData
+  validateData,
+  redirectTo
 }

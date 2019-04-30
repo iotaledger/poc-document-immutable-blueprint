@@ -11,7 +11,7 @@ import Header from './partials/header'
 import Loader from './partials/loader'
 import Footer from './partials/footer'
 import { dSeed, dAddress } from './partials/defaults'
-import { isValidTrytes, validateData } from './partials/utils'
+import { isValidTrytes, validateData, redirectTo } from './partials/utils'
 
 const styles = {width: '360px'}
 
@@ -92,9 +92,8 @@ class App extends Component {
       });
 
     } catch(e) {
-      alert(`could not establish connection to this node
-        ${this.state.provider}, please choose a working
-        node and try again!`)
+      alert(`could not establish connection to this node ${this.state.provider}, please choose a working node and try again!`)
+      redirectTo('/')
     }
   }
   verify(address, transactionHash, navigate) {
