@@ -3,6 +3,16 @@ body {
   padding: 0;
 }
 
+@media (max-width: 767px) {
+  .sticky-header {
+      height: 250px;
+      align-items: flex-end;
+  }
+  .sticky-header__control > h1 {
+    align-self: flex-end;
+  }
+}
+
 .step-progress-bar-item--visited {
   animation-name: light;
   animation-duration: 1s;
