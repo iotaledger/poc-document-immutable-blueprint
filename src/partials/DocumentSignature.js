@@ -69,7 +69,7 @@ class SignDocument extends Component {
 
       </div>
       {!generatedHash && <section>
-        <p>This is a very long desciption to be incorporated here, to be written in the future</p>
+        <p>By signing your Document, it will be stored securely in the Tangle and therefore any subsequent change to the document will be detected!</p>
         <div style={topMargin}>
           <Radio
             label="Use the default Address and Seed (faster)"
