@@ -6,11 +6,11 @@
   
   then you can either sign brand new document(Step2) or Check an existing document (Jump directly to Step 3)
   
-  Here the link for the Poc ( https://build-vvzhlpnvdd.now.sh/ )
+  Here the link for the Poc ( https://build-jiwvfgyhjt.now.sh/)
 
  # Dev & Environment
  
- this Poc was heavily based on this library (https://github.com/iotaledger/signature-validation-tool) it can be used as a command line tool.
+ this Poc was heavily based on this library [iota-poex-tool](https://github.com/iotaledger/iota-poex-tool) it can be used as a command line tool.
  
  So you can build your custom Document Immutability check!
  
