@@ -4,10 +4,14 @@ body {
 }
 
 
-/*
-  {  }
-*/
+.instruction-title {
+  font-size: 45px;
+}
+
 @media (max-width: 515px) {
+  .middle-column {
+    max-width: 430px!important;
+  }
   .sticky-header {
       height: 250px;
       align-items: flex-end;
@@ -17,6 +21,7 @@ body {
   }
   .button-container {
     flex-direction: column-reverse;
+    padding: 0 16px;
   }
 }
 @media (min-width: 516px) {
