@@ -10,7 +10,7 @@
 
  # Dev & Environment
  
- this Poc was heavily based on this library [iota-poex-tool](https://github.com/iotaledger/iota-poex-tool) it can be used as a command line tool.
+ this Poc was heavily based on this library [@iota/poex-tool](https://www.npmjs.com/package/@iota/poex-tool) it can be used as a command line tool.
  
  So you can build your custom Document Immutability check!
  
