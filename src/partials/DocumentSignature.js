@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { verify, hash, publish } from 'iota-poex-tool'
+import { verify, hash, publish } from '@iota/poex-tool'
 import { dSeed, dAddress } from './defaults'
 import Radio from './radio'
 import Title from './title'

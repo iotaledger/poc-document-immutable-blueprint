@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { verify, hash, publish } from 'iota-poex-tool'
+import { verify, hash, publish } from '@iota/poex-tool'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Title from './title'
 
