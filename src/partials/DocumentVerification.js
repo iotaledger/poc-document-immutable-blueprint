@@ -44,7 +44,7 @@ class App extends Component {
     let validText = false
     if(docMutated === false) {
       title = 'Document has been changed.'
-      text = 'Looks like the Document have been mutated, the calculated hash has changed ever since we signed it with the Tangle.'
+      text = 'It looks like the document has been modified, the calculated hash has changed ever since it was signed on the Tangle.'
     } else if(docMutated === true) {
       title = 'Document Valid!'
       text = 'Tangle Signature valid.'
