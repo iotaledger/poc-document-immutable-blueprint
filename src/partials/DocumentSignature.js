@@ -47,8 +47,6 @@ class SignDocument extends Component {
   }
   render() {
     let generatedHash = this.props.genTxHash!=''
-    let seedLink =  <a target="_blank" href='https://ipfs.io/ipfs/QmdqTgEdyKVQAVnfT5iV4ULzTbkV4hhkDkMqGBuot8egfA'>here (SEED)</a>
-    let AddLink =  <a target="_blank" href='https://people.dsv.su.se/~haughey/iota-offline/iota-offline-address-generator.html'>here (ADDRESS)</a>
     let title = 'Generate your TX Hash'
     if(generatedHash) {
       title = 'TX Hash Generated'

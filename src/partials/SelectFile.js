@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { verify, hash, publish } from '@iota/poex-tool'
 import nodes from './../nodes'
-import DropDown from './../Dropdown'
+import DropDown from './Dropdown'
 import Title from './title'
 
 const styles = {width: '360px'}

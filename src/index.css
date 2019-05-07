@@ -3,7 +3,6 @@ body {
   padding: 0;
 }
 
-
 .instruction-title {
   font-size: 45px;
 }
@@ -48,7 +47,6 @@ body {
   animation-duration: 0.5s;
   animation-name: slidein;
 }
-
 
 @keyframes slidein {
   from {

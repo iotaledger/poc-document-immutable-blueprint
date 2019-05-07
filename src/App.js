@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { verify, hash, publish } from '@iota/poex-tool'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodes from './nodes'
-import DropDown from './Dropdown'
 import DocumentSignature from './partials/DocumentSignature'
 import DocumentVerification from './partials/DocumentVerification'
 import SelectFile from './partials/SelectFile'
