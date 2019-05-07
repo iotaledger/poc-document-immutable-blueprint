@@ -1,23 +1,20 @@
   ## Document Immutability check
 
-  # Before starting
-
-  Before you can use this PoC, you have to pick up a provider and a document to check (Step 1)
-  
-  then you can either sign brand new document(Step2) or Check an existing document (Jump directly to Step 3)
-  
-  Here the link for the Poc ( https://iota-poex.dag.sh/ )
+  https://iota-poex.dag.sh/
 
  # Dev & Environment
- 
+
  this Poc was heavily based on this library [@iota/poex-tool](https://www.npmjs.com/package/@iota/poex-tool) it can be used as a command line tool.
- 
+
  So you can build your custom Document Immutability check!
- 
+
+ # Start project
+
+ - npm start
+
  # Deployment
- 
+
  Use:
- 
+
  - npm run build
- - now
- 
+ - npm run deploy
