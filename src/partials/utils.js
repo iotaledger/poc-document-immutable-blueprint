@@ -22,7 +22,7 @@ function validateData(address, transactionHash, provider, file, cb) {
     isValid = false
   }
   if(file==null && isValid) {
-    alert('Looks like the File is not set, please set your file to be valdiated! you are going to be redirected to start fresh again')
+    alert('Looks like the File is not set, please set your file to be validated! you are going to be redirected to start fresh again')
     redirectTo('/')
     isValid = false
   }
