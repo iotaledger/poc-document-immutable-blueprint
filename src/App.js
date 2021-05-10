@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { verify, hash, publish } from '@iota/poex-tool'
+import { verify, verifyLegacy, hash, publish } from '@iota/poex-tool'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import nodes from './nodes'
 import DocumentSignature from './partials/DocumentSignature'
@@ -70,22 +70,26 @@ class App extends Component {
     const provider = this.state.provider
     const data = this.state.hashValue
     const { depth, minWeightMagnitude } = getProviderParams(this.state.isMainnet)
+
     try {
-      const retArr = await publish({
-        provider,
-        data,
-        address,
-        seed,
-        depth,
-        minWeightMagnitude
-      })
-      navigator.clipboard.writeText(retArr[0].hash).then(() => {
+      const messageId = await publish(data, "BLUEPRINT_IMMUTABLE_DOCUMENTS", provider);
+      // const retArr = []
+      // retArr[0].hash = "asdf";
+      // const retArr = await publish({
+      //   provider,
+      //   data,
+      //   address,
+      //   seed,
+      //   depth,
+      //   minWeightMagnitude
+      // })
+      navigator.clipboard.writeText(messageId).then(() => {
         /* clipboard successfully set */
         this.setState({
-          genTxHash: retArr[0].hash,
+          genTxHash: messageId,
           isLoading: false
         })
-        alert('TX Hash has been copied to clipboard!')
+        alert('MessageId has been copied to clipboard!')
       }, function() {
         alert('clipboard not supported, please copy manually the generated TX Hash')
       });
@@ -115,7 +119,8 @@ class App extends Component {
          provider: this.state.provider
        }
        try {
-         const verified = await verify(bundle, true, file)
+        //  verify(messageId, true, file, provider)
+         const verified = await verifyLegacy(bundle, true, file)
          this.setState({ isLoading: false, docMutated: verified })
        } catch(e) {
          console.log(e)
@@ -175,7 +180,7 @@ class App extends Component {
                                                       genTxHash={this.state.genTxHash}
                                                       setNextPage={this.setNextPage}
                                                       />)} />
-              <Route path="/verif" component={({ history }) => (<DocumentVerification
+              <Route path="/verify" component={({ history }) => (<DocumentVerification
                                                         history={history}
                                                         transactionHash={this.state.transactionHash}
                                                         handleInputTextChange={this.handleInputTextChange}
