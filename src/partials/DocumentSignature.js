@@ -70,24 +70,11 @@ class SignDocument extends Component {
         <p>By signing your Document, it will be stored securely in the Tangle and therefore any subsequent change to the document will be detected!</p>
         <div style={topMargin}>
           <Radio
-            label="Use the default Address and Seed (faster)"
+            label="Use default seed (faster)"
             handleRandioChange={this.handleRandioChange}
 
             name="default"
             checked={this.state.useDefault}
-          />
-        </div>
-        <div style={topMargin}>
-          <label style={{marginLeft: '10px'}}>Address</label>
-          <input className="button button--secondary"
-                 type="text"
-                 id="input"
-                 name="pubAddress"
-                 style={styles}
-                 disabled={this.state.useDefault}
-                 placeholder="Publish Address"
-                 value={this.state.useDefault? dAddress : this.state.pubAddress}
-                 onChange={this.handleInputTextChange}
           />
         </div>
         <div style={topMargin}>

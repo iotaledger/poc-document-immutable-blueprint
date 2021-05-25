@@ -1,4 +1,4 @@
-const dSeed = 'HEQLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDHELLOWORL9D'
+const dSeed = 'abcdef123456789abcdef123456789abcdef123456789abcdef123456789abcd'
 const dAddress = 'MRDVKCDQAPYQOJEQTUWDMNYZKDUDBRNHJWV9VTKTCUUYQICLPFBETMYYVKEPFCXZE9EJZHFUWJZVEWUCWSGDUVMOYD'
 const navMap = new Map();
 navMap.set('/', { pageN: 0, curP: '/', pageTitle: '1- Please choose your file to be signed or verified', prev: null, next: '/node'})

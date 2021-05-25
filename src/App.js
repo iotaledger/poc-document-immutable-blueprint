@@ -72,17 +72,9 @@ class App extends Component {
     const { depth, minWeightMagnitude } = getProviderParams(this.state.isMainnet)
 
     try {
+      console.log(data, provider)
       const messageId = await publish(data, "BLUEPRINT_IMMUTABLE_DOCUMENTS", provider);
-      // const retArr = []
-      // retArr[0].hash = "asdf";
-      // const retArr = await publish({
-      //   provider,
-      //   data,
-      //   address,
-      //   seed,
-      //   depth,
-      //   minWeightMagnitude
-      // })
+      console.log(messageId)
       navigator.clipboard.writeText(messageId).then(() => {
         /* clipboard successfully set */
         this.setState({

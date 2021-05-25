@@ -28,6 +28,7 @@ class SelectNode extends Component {
         <Title value={title} valid={validText} />
       </div>
       <p>A node is the first receiver of your transaction, it will be later broadcasted to its neighbours</p>
+      <p>Note: If you just want to verify a Proof-of-Existence you issued before the Chrysalis-network was live (e.g. before April 28th, 2021), just click "Continue".</p>
       <DropDown
         nodes={nodes}
         onProviderSelected={this.props.onProviderSelected}
