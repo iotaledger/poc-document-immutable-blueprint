@@ -33,8 +33,6 @@ function validateData(address, transactionHash, provider, file, cb) {
     redirectTo('/');
     isValid = false;
   }
-  console.log(transactionHash)
-  console.log(isMessageId(transactionHash))
   if (isValid && isMessageId(transactionHash)) {
     //Only on Chrysalis we need a provided node, as on legacy we use a hardcoded URL
     if (provider == '') {

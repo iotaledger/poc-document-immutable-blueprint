@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { verify, hash, publish } from '@iota/poex-tool'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Title from './title'
+import { isValidTrytes } from './utils';
 
 const styles = { width: '100%' }
 
 function getProviderParams(isMainnet) {
-  return isMainnet ? {depth :3, minWeightMagnitude :14} : {depth :3, minWeightMagnitude :9}
+  return isMainnet ? { depth: 3, minWeightMagnitude: 14 } : { depth: 3, minWeightMagnitude: 9 }
 }
 
 class App extends Component {
@@ -14,25 +15,32 @@ class App extends Component {
     super(props)
     this.state = {
       file: null,
-      transactionHash: '',
-      address: '',
+      msgIdOrTxHash: '',
+      legacyAddress: '',
       provider: '',
-      verifyAnother: false
+      verifyAnother: false,
+      isLegacy: false
     }
-     this.verifyAnother = this.verifyAnother.bind(this)
-     this.handleInputTextChange = this.handleInputTextChange.bind(this)
-    }
+    this.verifyAnother = this.verifyAnother.bind(this)
+    this.handleInputTextChange = this.handleInputTextChange.bind(this)
+  }
   verifyAnother(e) {
     this.setState({ verifyAnother: true })
   }
   handleInputTextChange(e) {
-    if(e.target.name === 'txhash') {
+    if (e.target.name === 'msgIdOrtxhash') {
       this.setState({
-        transactionHash: e.target.value
+        msgIdOrTxHash: e.target.value
       })
-    } else if(e.target.name === 'address') {
+      if (isValidTrytes(e.target.value) &&e.target.value.length == 81) {
+        this.setState({ isLegacy: true })
+      }
+      else {
+        this.setState({ isLegacy: false })
+      }
+    } else if (e.target.name === 'legacyAddress') {
       this.setState({
-        address: e.target.value
+        legacyAddress: e.target.value
       })
     }
   }
@@ -42,19 +50,19 @@ class App extends Component {
     let title = ''
     let text = ''
     let validText = false
-    if(docMutated === false) {
+    if (docMutated === false) {
       title = 'Document has been changed.'
       text = 'It looks like the document has been modified, the calculated hash has changed ever since it was signed on the Tangle.'
-    } else if(docMutated === true) {
+    } else if (docMutated === true) {
       title = 'Document Valid!'
       text = 'Tangle Signature valid.'
       validText = true
     } else {
       title = 'Let the Tangle validate it'
-      text =  "Please fill the generated TX Hash (should be in your clipboard) and the Fetching Address, if you don't have them yet, please go to Step 2"
+      text = "Please fill the generated TX Hash (should be in your clipboard) and the Fetching Address, if you don't have them yet, please go to Step 2"
     }
-    const { address, transactionHash } = this.state
-    return(<div>
+    const { legacyAddress, msgIdOrTxHash } = this.state
+    return (<div>
       <div>
         <Title value={title} valid={validText} />
       </div>
@@ -73,36 +81,39 @@ class App extends Component {
         <a onClick={this.verifyAnother}>Verify another document</a>
         <a href={`${window.location.origin}/`}>Start over again</a>
       </div>}
-      {!docMutated &&<section>
-         <p>{text}</p>
-         <div>
+      {!docMutated && <section>
+        <p>{text}</p>
+        <div>
+          <input className="button button--secondary"
+            type="text"
+            id="input"
+            name="msgIdOrtxhash"
+            style={styles}
+            placeholder="MessageID / Legacy-TX Hash"
+            value={this.state.msgIdOrTxHash}
+            onChange={this.handleInputTextChange}
+            
+          />
+        </div>
+        {this.state.isLegacy == true && // Only render this field if it happens to be a Legacy-TX-hash that has been provided
+          <div>
             <input className="button button--secondary"
-                   type="text"
-                   id="input"
-                   name="txhash"
-                   style={styles}
-                   placeholder="TX Hash"
-                   value={this.state.transactionHash}
-                   onChange={this.handleInputTextChange}
+              type="text"
+              id="input"
+              name="legacyAddress"
+              style={styles}
+              placeholder="Legacy-Fetch Address"
+              value={this.state.legacyAddress}
+              onChange={this.handleInputTextChange}
             />
-         </div>
-         <div>
-            <input className="button button--secondary"
-                   type="text"
-                   id="input"
-                   name="address"
-                   style={styles}
-                   placeholder="Fetch Address"
-                   value={this.state.address}
-                   onChange={this.handleInputTextChange}
-            />
-         </div>
-         <div>
-            <button className="button" onClick={e => this.props.verify(address, transactionHash, this.props.history.push)}>Verify</button>
-            <button className="button" onClick={this.props.reset}>Reset</button>
-         </div>
-       </section>}
-      </div>)
+          </div>
+        }
+        <div>
+          <button className="button" onClick={e => this.props.verify(legacyAddress, msgIdOrTxHash, this.props.history.push)}>Verify</button>
+          <button className="button" onClick={this.props.reset}>Reset</button>
+        </div>
+      </section>}
+    </div>)
   }
 }
 

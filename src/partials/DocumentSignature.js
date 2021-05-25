@@ -8,7 +8,7 @@ const styles = { width: '100%' }
 const topMargin = { marginTop: '30px' }
 
 function getProviderParams(isMainnet) {
-  return isMainnet ? {depth :3, minWeightMagnitude :14} : {depth :3, minWeightMagnitude :9}
+  return isMainnet ? { depth: 3, minWeightMagnitude: 14 } : { depth: 3, minWeightMagnitude: 9 }
 }
 
 class SignDocument extends Component {
@@ -17,53 +17,48 @@ class SignDocument extends Component {
     this.state = {
       useDefault: true,
       name: 'default',
-      pubAddress: '',
       pubSeed: ''
     }
     this.handleRandioChange = this.handleRandioChange.bind(this)
     this.handleInputTextChange = this.handleInputTextChange.bind(this)
     this.signDocument = this.signDocument.bind(this)
   }
-  signDocument(pubAddress, pubSeed) {
-    if(this.state.useDefault) {
-      this.props.signDocument(dAddress, dSeed)
+  signDocument(pubSeed) {
+    if (this.state.useDefault) {
+      this.props.signDocument(dSeed)
     } else {
-      this.props.signDocument(pubAddress, pubSeed)
+      this.props.signDocument(pubSeed)
     }
   }
   handleRandioChange(state, name) {
     this.setState({ useDefault: ((name === 'userdata') ? false : state), name })
   }
   handleInputTextChange(e) {
-   if(e.target.name === 'pubAddress') {
-      this.setState({
-        pubAddress: e.target.value
-      })
-    } else if(e.target.name === 'pubSeed') {
+    if (e.target.name === 'pubSeed') {
       this.setState({
         pubSeed: e.target.value
       })
     }
   }
   render() {
-    let generatedHash = this.props.genTxHash!=''
+    let generatedHash = this.props.genTxHash != ''
     let title = 'Generate your TX Hash'
-    if(generatedHash) {
+    if (generatedHash) {
       title = 'TX Hash Generated'
     }
-    return(<div>
+    return (<div>
       <div>
         <Title value={title} valid={generatedHash} />
       </div>
       <div style={{ marginTop: '35px' }}>
         {generatedHash && <div>
-                            <Title
-                              value={this.props.genTxHash}
-                              valid={false}
-                              style={{ fontSize: '32px', wordBreak: 'break-word' }}
-                            />
-                            <p>The TX Hash already copied in clipboard, please press 'Continue'</p>
-                           </div>}
+          <Title
+            value={this.props.genTxHash}
+            valid={false}
+            style={{ fontSize: '32px', wordBreak: 'break-word' }}
+          />
+          <p>The TX Hash already copied in clipboard, please press 'Continue'</p>
+        </div>}
 
       </div>
       {!generatedHash && <section>
@@ -78,16 +73,16 @@ class SignDocument extends Component {
           />
         </div>
         <div style={topMargin}>
-          <label style={{marginLeft: '10px'}}>Seed</label>
+          <label style={{ marginLeft: '10px' }}>Seed</label>
           <input className="button button--secondary"
-                 type="text"
-                 id="input"
-                 name="pubSeed"
-                 style={styles}
-                 disabled={this.state.useDefault}
-                 placeholder="Seed"
-                 value={this.state.useDefault? dSeed : this.state.pubSeed}
-                 onChange={this.handleInputTextChange}
+            type="text"
+            id="input"
+            name="pubSeed"
+            style={styles}
+            disabled={this.state.useDefault}
+            placeholder="Seed"
+            value={this.state.useDefault ? dSeed : this.state.pubSeed}
+            onChange={this.handleInputTextChange}
           />
         </div>
 
@@ -101,13 +96,13 @@ class SignDocument extends Component {
         </div>
 
         <div style={topMargin}>
-           <button
+          <button
             className="button"
-            onClick={e => this.signDocument(this.state.pubAddress, this.state.pubSeed)}>
+            onClick={e => this.signDocument(this.state.pubSeed)}>
             Sign the document
            </button>
 
-           <button
+          <button
             className="button"
             onClick={this.props.reset}>
             Clear
@@ -115,7 +110,7 @@ class SignDocument extends Component {
         </div>
       </section>}
 
-      </div>)
+    </div>)
   }
 }
 

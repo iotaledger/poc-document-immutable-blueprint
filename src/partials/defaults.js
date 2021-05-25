@@ -1,5 +1,6 @@
 const dSeed = 'abcdef123456789abcdef123456789abcdef123456789abcdef123456789abcd'
 const dAddress = 'MRDVKCDQAPYQOJEQTUWDMNYZKDUDBRNHJWV9VTKTCUUYQICLPFBETMYYVKEPFCXZE9EJZHFUWJZVEWUCWSGDUVMOYD'
+const legacyPermanode = 'https://chronicle.iota.org/api'// 'https://chronicle.iota.org/api' //
 const navMap = new Map();
 navMap.set('/', { pageN: 0, curP: '/', pageTitle: '1- Please choose your file to be signed or verified', prev: null, next: '/node'})
       .set('/node', { pageN: 1, curP: '/node', pageTitle: '2- Please Select your Node to connect to', prev: '/', next: '/sign'})
@@ -9,5 +10,6 @@ navMap.set('/', { pageN: 0, curP: '/', pageTitle: '1- Please choose your file to
 export {
   dSeed,
   dAddress,
+  legacyPermanode,
   navMap
 }
