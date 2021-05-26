@@ -45,14 +45,14 @@ class App extends Component {
     let text = ''
     let validText = false
     if (docMutated === false) {
-      title = 'Document has been changed.'
+      title = 'Document Has Been Changed'
       text = 'It looks like the document has been modified, the calculated hash has changed ever since it was signed on the Tangle.'
     } else if (docMutated === true) {
-      title = 'Document Valid!'
-      text = 'Tangle Signature valid.'
+      title = 'Document Is Valid!'
+      text = 'Tangle signature is valid.'
       validText = true
     } else {
-      title = 'Let the Tangle validate it'
+      title = 'Let the Tangle Validate It'
       text = "Please fill in the generated MessageID (should be in your clipboard). If you want to verify a PoE created before the Chrysalis network upgrade, please enter your Transaction Hash and then the issuing address."
     }
     const { legacyAddress, msgIdOrTxHash } = this.state

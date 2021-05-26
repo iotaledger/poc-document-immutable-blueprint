@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { verify, verifyLegacy, hash, publish } from '@iota/poex-tool'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import DocumentSignature from './partials/DocumentSignature'
 import DocumentVerification from './partials/DocumentVerification'
 import SelectFile from './partials/SelectFile'
@@ -11,13 +11,11 @@ import Footer from './partials/footer'
 import { legacyPermanode } from './partials/defaults'
 import { validateData, redirectTo } from './partials/utils'
 
-
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       currPath: '/',
-      pageTitle: 'No Title?',
       file: null,
       transactionHash: '',
       provider: '',
@@ -34,17 +32,12 @@ class App extends Component {
     this.reset = this.reset.bind(this)
     this.onProviderSelected = this.onProviderSelected.bind(this)
     this.signDocument = this.signDocument.bind(this)
-    this.setTitle = this.setTitle.bind(this)
     this.triggerRouteChange = this.triggerRouteChange.bind(this)
   }
   triggerRouteChange(childState) {
     this.setState({ currPath: childState.currPath })
   }
-  setTitle(title) {
-    this.setState({
-      pageTitle: title
-    })
-  }
+
   onProviderSelected(provider, isMainnet) {
     this.setState({
       provider,
@@ -142,7 +135,6 @@ class App extends Component {
     return (
       <Router>
         <Header
-          pageTitle={this.state.pageTitle}
           enableNextPage={this.state.enableNextPage}
           currPath={this.state.currPath}
         />

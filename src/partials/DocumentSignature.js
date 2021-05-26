@@ -6,10 +6,6 @@ import Title from './title'
 const styles = { width: '100%' }
 const topMargin = { marginTop: '30px' }
 
-function getProviderParams(isMainnet) {
-  return isMainnet ? { depth: 3, minWeightMagnitude: 14 } : { depth: 3, minWeightMagnitude: 9 }
-}
-
 class SignDocument extends Component {
   constructor(props) {
     super(props)
@@ -41,9 +37,9 @@ class SignDocument extends Component {
   }
   render() {
     let generatedHash = this.props.genTxHash != ''
-    let title = 'Generate your Proof-of-Existence'
+    let title = 'Generate Your Proof-of-Existence'
     if (generatedHash) {
-      title = 'Message containing the proof has been broadcasted to the Tangle!'
+      title = 'Message Containing the Proof Has Been Broadcasted to the Tangle!'
     }
     return (<div>
       <div>

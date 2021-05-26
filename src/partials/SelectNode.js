@@ -11,7 +11,7 @@ class SelectNode extends Component {
   }
   render() {
     let everythingIsOk = (this.props.provider!='')
-    let title = 'Select your Node'
+    let title = 'Select Your Node'
     let validText = false
     if(everythingIsOk === true) {
       title = 'Selected node runs on ' + ((this.props.isMainnet === true)? 'Mainnet' : 'Devnet')

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import radioChecked from './assets/radio-checked.svg'
 import radioUnChecked from './assets/radio-unchecked.svg'
 
-const radioSize = { width: '25px', height: '25px' }
 
 class Radio extends Component {
   constructor(props) {

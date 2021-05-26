@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
-import { verify, hash, publish } from '@iota/poex-tool'
-import nodes from './../nodes'
-import DropDown from './Dropdown'
 import Title from './title'
-
-const styles = {width: '360px'}
-
-function getProviderParams(isMainnet) {
-  return isMainnet ? {depth :3, minWeightMagnitude :14} : {depth :3, minWeightMagnitude :9}
-}
 
 function SelectFileArea(p) {
   return (<div style={{cursor: 'pointer'}} className={`file-upload ${p.fileSelected ? 'file-upload--selected' : ''}`}>
@@ -24,7 +15,7 @@ class SelectFile extends Component {
   }
   render() {
     let everythingIsOk = (this.props.hashValue!='')
-    let title = 'Select your file'
+    let title = 'Select Your File'
     let validText = false
     if(everythingIsOk === true) {
       title = 'File Selected'
