@@ -42,7 +42,7 @@ function validateData(address, transactionHash, provider, file, cb) {
     }
   }
   else if (isValid && (!isValidTrytes(address) || !isValidTrytes(transactionHash))) {
-    alert('Did you attempt to enter a Proof of Existence issued on the Legacy-network? If so: Address and/or transactionHash are not yet set! Please fill the below with 81 Trytes.');
+    alert('Provided info neither matches a valid message-ID nor a legacy-transaction.');
     isValid = false;
   }
   return isValid;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { verify, verifyLegacy, hash, publish } from '@iota/poex-tool'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import nodes from './nodes'
 import DocumentSignature from './partials/DocumentSignature'
 import DocumentVerification from './partials/DocumentVerification'
 import SelectFile from './partials/SelectFile'
@@ -9,14 +8,9 @@ import SelectNode from './partials/SelectNode'
 import Header from './partials/header'
 import Loader from './partials/loader'
 import Footer from './partials/footer'
-import { dSeed, dAddress, legacyPermanode } from './partials/defaults'
-import { isValidTrytes, validateData, redirectTo } from './partials/utils'
+import { legacyPermanode } from './partials/defaults'
+import { validateData, redirectTo } from './partials/utils'
 
-const styles = { width: '360px' }
-
-function getProviderParams(isMainnet) {
-  return isMainnet ? { depth: 3, minWeightMagnitude: 14 } : { depth: 3, minWeightMagnitude: 9 }
-}
 
 class App extends Component {
   constructor(props) {
@@ -79,13 +73,13 @@ class App extends Component {
           genTxHash: messageId,
           isLoading: false
         })
-        alert('MessageId has been copied to clipboard!')
+        alert('MessageID has been copied to clipboard!')
       }, function () {
-        alert('clipboard not supported, please copy manually the generated TX Hash')
+        alert('Clipboard not supported, please manually copy the generated MessageID')
       });
 
     } catch (e) {
-      alert(`could not establish connection to this node ${this.state.provider}, please choose a working node and try again!`)
+      alert(`could not establish connection to the node ${this.state.provider}, please choose a working node and try again!`)
       redirectTo('/')
     }
   }
@@ -115,9 +109,6 @@ class App extends Component {
           }
           console.log(bundle)
           verified = await verifyLegacy(bundle, true, file);
-          console.log(verified)
-          console.log(verified)
-          console.log(verified)
         }
         else {
           verified = await verify(msgIdOrTxHash, true, file, this.state.provider);
@@ -126,7 +117,7 @@ class App extends Component {
         this.setState({ isLoading: false, docMutated: verified })
       } catch (e) {
         console.log(e)
-        // this.setState({ isLoading: false, docMutated: false })
+        this.setState({ isLoading: false, docMutated: false })
       }
 
     });
@@ -171,6 +162,7 @@ class App extends Component {
               onProviderSelected={this.onProviderSelected}
               hashValue={this.state.hashValue}
               provider={this.state.provider}
+              isMainnet={this.state.isMainnet}
               setNextPage={this.setNextPage}
             />)} />
             <Route path="/sign" component={() => (<DocumentSignature

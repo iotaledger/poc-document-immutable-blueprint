@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { verify, hash, publish } from '@iota/poex-tool'
-import { dSeed, dAddress } from './defaults'
+import { dSeed } from './defaults'
 import Radio from './radio'
 import Title from './title'
 
@@ -42,9 +41,9 @@ class SignDocument extends Component {
   }
   render() {
     let generatedHash = this.props.genTxHash != ''
-    let title = 'Generate your TX Hash'
+    let title = 'Generate your Proof-of-Existence'
     if (generatedHash) {
-      title = 'TX Hash Generated'
+      title = 'Message containing the proof has been broadcasted to the Tangle!'
     }
     return (<div>
       <div>
@@ -57,12 +56,16 @@ class SignDocument extends Component {
             valid={false}
             style={{ fontSize: '32px', wordBreak: 'break-word' }}
           />
-          <p>The TX Hash already copied in clipboard, please press 'Continue'</p>
+          <p>The MessageID, meaning the unique identifier of the message stored on the Tangle, is copied to your clipboard. Please press 'Continue'</p>
         </div>}
 
       </div>
       {!generatedHash && <section>
-        <p>By signing your Document, it will be stored securely in the Tangle and therefore any subsequent change to the document will be detected!</p>
+        {/* <p>By signing your Document, it will be stored securely in the Tangle and therefore any subsequent change to the document will be detected!</p> */}
+        {/* <p>By signing your Document, a so-called Proof-of-Existence (PoE) will be securely stored in the Tangle. A PoE is a unique identifier of the exact content (technically speaking, a SHA-256 Hash-value)of the file you provided that is easy to verify if you have access to the file, but impossible to trace back to the original content of the file.
+           Therefore any subsequent change to the document will be detected!, as the </p> */}
+           <p>By signing your document, a so-called Proof-of-Existence (PoE) will be securely stored in the Tangle. A PoE is a unique fingerprint of the exact content (technically speaking, the SHA-256-hash) of the file you provided.</p>
+           <p>Such a hash is easy to verify if you have access to the file, but it is impossible to deduce the original content of the file from it. Therefore, any subsequent change to the document will be detected, while you remain in complete control of your data!</p>
         <div style={topMargin}>
           <Radio
             label="Use default seed (faster)"
@@ -88,7 +91,7 @@ class SignDocument extends Component {
 
         <div style={topMargin}>
           <Radio
-            label="Use my own Address and Seed"
+            label="Use my own seed"
             handleRandioChange={this.handleRandioChange}
             name="userdata"
             checked={(this.state.useDefault === false) && this.state.name === 'userdata'}

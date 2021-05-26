@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import { verify, hash, publish } from '@iota/poex-tool'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Title from './title'
 import { isValidTrytes } from './utils';
 
 const styles = { width: '100%' }
-
-function getProviderParams(isMainnet) {
-  return isMainnet ? { depth: 3, minWeightMagnitude: 14 } : { depth: 3, minWeightMagnitude: 9 }
-}
 
 class App extends Component {
   constructor(props) {
@@ -59,7 +53,7 @@ class App extends Component {
       validText = true
     } else {
       title = 'Let the Tangle validate it'
-      text = "Please fill the generated TX Hash (should be in your clipboard) and the Fetching Address, if you don't have them yet, please go to Step 2"
+      text = "Please fill in the generated MessageID (should be in your clipboard). If you want to verify a PoE created before the Chrysalis network upgrade, please enter your Transaction Hash and then the issuing address."
     }
     const { legacyAddress, msgIdOrTxHash } = this.state
     return (<div>
@@ -72,7 +66,8 @@ class App extends Component {
         <div className="message-box--text">
           <div className="message-box--title">{title}</div>
           <div className="message-box--content">
-            {text}
+            <p>{text} </p>
+            <p></p>
           </div>
         </div>
       </div>}
