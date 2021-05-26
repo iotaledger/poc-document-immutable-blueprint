@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { navMap } from './defaults'
 
 class Header extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     const currScrData = navMap.get(window.location.pathname)
     const keys = Array.from(navMap.keys())

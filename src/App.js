@@ -175,7 +175,7 @@ class App extends Component {
               reset={this.reset}
               docMutated={this.state.docMutated}
               verify={this.verify}
-              reset={this.reset} />)} />
+            />)} />
 
           </div>
         </div>

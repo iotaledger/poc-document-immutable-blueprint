@@ -16,7 +16,7 @@ function isValidTrytes(str) {
      * @param str The string to validate.
      */
 function isMessageId(str) {
-  if (!new RegExp(`^[0-9a-f]{${str.length}}$`).test(str) || str.length != 64) {
+  if (!new RegExp(`^[0-9a-f]{${str.length}}$`).test(str) || str.length !== 64) {
     return false;
   }
   return true;
@@ -35,7 +35,7 @@ function validateData(address, transactionHash, provider, file, cb) {
   }
   if (isValid && isMessageId(transactionHash)) {
     //Only on Chrysalis we need a provided node, as on legacy we use a hardcoded URL
-    if (provider == '') {
+    if (provider === '') {
       alert('Looks like the node is not yet selected, please go and select your node if you want to sign a document! You are now going to be redirected to start fresh again.');
       redirectTo('/');
       isValid = false;

@@ -6,18 +6,15 @@ import Title from './title'
 const styles = { width: '100%' }
 
 class SelectNode extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
-    let everythingIsOk = (this.props.provider!='')
+    let everythingIsOk = (this.props.provider !== '')
     let title = 'Select Your Node'
     let validText = false
-    if(everythingIsOk === true) {
-      title = 'Selected node runs on ' + ((this.props.isMainnet === true)? 'Mainnet' : 'Devnet')
+    if (everythingIsOk === true) {
+      title = 'Selected Node Runs on ' + ((this.props.isMainnet === true) ? 'Mainnet' : 'Devnet')
       validText = true
     }
-    return(<div>
+    return (<div>
 
       <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'center' }}>
         <Title value={title} valid={validText} />
@@ -31,7 +28,7 @@ class SelectNode extends Component {
         styles={styles}
         provider={this.props.provider}
       />
-      </div>)
+    </div>)
   }
 }
 

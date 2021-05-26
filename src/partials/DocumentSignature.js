@@ -36,7 +36,7 @@ class SignDocument extends Component {
     }
   }
   render() {
-    let generatedHash = this.props.genTxHash != ''
+    let generatedHash = this.props.genTxHash !== ''
     let title = 'Generate Your Proof-of-Existence'
     if (generatedHash) {
       title = 'Message Containing the Proof Has Been Broadcasted to the Tangle!'
@@ -60,8 +60,8 @@ class SignDocument extends Component {
         {/* <p>By signing your Document, it will be stored securely in the Tangle and therefore any subsequent change to the document will be detected!</p> */}
         {/* <p>By signing your Document, a so-called Proof-of-Existence (PoE) will be securely stored in the Tangle. A PoE is a unique identifier of the exact content (technically speaking, a SHA-256 Hash-value)of the file you provided that is easy to verify if you have access to the file, but impossible to trace back to the original content of the file.
            Therefore any subsequent change to the document will be detected!, as the </p> */}
-           <p>By signing your document, a so-called Proof-of-Existence (PoE) will be securely stored in the Tangle. A PoE is a unique fingerprint of the exact content (technically speaking, the SHA-256-hash) of the file you provided.</p>
-           <p>Such a hash is easy to verify if you have access to the file, but it is impossible to deduce the original content of the file from it. Therefore, any subsequent change to the document will be detected, while you remain in complete control of your data!</p>
+        <p>By signing your document, a so-called Proof-of-Existence (PoE) will be securely stored in the Tangle. A PoE is a unique fingerprint of the exact content (technically speaking, the SHA-256-hash) of the file you provided.</p>
+        <p>Such a hash is easy to verify if you have access to the file, but it is impossible to deduce the original content of the file from it. Therefore, any subsequent change to the document will be detected, while you remain in complete control of your data!</p>
         <div style={topMargin}>
           <Radio
             label="Use default seed (faster)"

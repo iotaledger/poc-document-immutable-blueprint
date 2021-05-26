@@ -26,7 +26,7 @@ class App extends Component {
       this.setState({
         msgIdOrTxHash: e.target.value
       })
-      if (isValidTrytes(e.target.value) &&e.target.value.length == 81) {
+      if (isValidTrytes(e.target.value) &&e.target.value.length === 81) {
         this.setState({ isLegacy: true })
       }
       else {
@@ -49,7 +49,7 @@ class App extends Component {
       text = 'It looks like the document has been modified, the calculated hash has changed ever since it was signed on the Tangle.'
     } else if (docMutated === true) {
       title = 'Document Is Valid!'
-      text = 'Tangle signature is valid.'
+      text = 'The PoE stored in the Tangle matched the fingerprint of the provided file.'
       validText = true
     } else {
       title = 'Let the Tangle Validate It'
@@ -90,7 +90,7 @@ class App extends Component {
             
           />
         </div>
-        {this.state.isLegacy == true && // Only render this field if it happens to be a Legacy-TX-hash that has been provided
+        {this.state.isLegacy === true && // Only render this field if it happens to be a Legacy-TX-hash that has been provided
           <div>
             <input className="button button--secondary"
               type="text"
