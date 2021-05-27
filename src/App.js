@@ -20,7 +20,7 @@ class App extends Component {
       transactionHash: '',
       provider: '',
       address: '',
-      docMutated: null,
+      docValid: null,
       hashValue: '',
       genTxHash: '',
       genChannelAddress: '',
@@ -100,17 +100,16 @@ class App extends Component {
             hash: msgIdOrTxHash,
             provider: legacyPermanode
           }
-          console.log(bundle)
           verified = await verifyLegacy(bundle, true, file);
         }
         else {
           verified = await verify(msgIdOrTxHash, true, file, this.state.provider);
         }
 
-        this.setState({ isLoading: false, docMutated: verified })
+        this.setState({ isLoading: false, docValid: verified })
       } catch (e) {
         console.log(e)
-        this.setState({ isLoading: false, docMutated: false })
+        this.setState({ isLoading: false, docValid: false })
       }
 
     });
@@ -173,7 +172,7 @@ class App extends Component {
               address={this.state.address}
               onChange={this.handleInputTextChange}
               reset={this.reset}
-              docMutated={this.state.docMutated}
+              docValid={this.state.docValid}
               verify={this.verify}
             />)} />
 

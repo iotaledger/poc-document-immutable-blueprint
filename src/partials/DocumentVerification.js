@@ -39,15 +39,15 @@ class App extends Component {
     }
   }
   render() {
-    let docMutated = this.props.docMutated
-    docMutated = this.state.verifyAnother ? '' : docMutated
+    let docValid = this.props.docValid
+    docValid = this.state.verifyAnother ? '' : docValid
     let title = ''
     let text = ''
     let validText = false
-    if (docMutated === false) {
+    if (docValid === false) {
       title = 'Document Has Been Changed'
-      text = 'It looks like the document has been modified, the calculated hash has changed ever since it was signed on the Tangle.'
-    } else if (docMutated === true) {
+      text = 'It looks like the document has been modified, the file fingerprint has changed ever since it was signed on the Tangle.'
+    } else if (docValid === true) {
       title = 'Document Is Valid!'
       text = 'The PoE stored in the Tangle matched the fingerprint of the provided file.'
       validText = true
@@ -61,7 +61,7 @@ class App extends Component {
         <Title value={title} valid={validText} />
       </div>
 
-      {docMutated && <div style={{ marginTop: '40px' }} className="message-box message-box__success">
+      {docValid && <div style={{ marginTop: '40px' }} className="message-box message-box__success">
         <div className="message-box--icon"></div>
         <div className="message-box--text">
           <div className="message-box--title">{title}</div>
@@ -72,16 +72,16 @@ class App extends Component {
         </div>
       </div>}
 
-      {docMutated && <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'space-between' }} >
+      {docValid && <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'space-between' }} >
         <a onClick={this.verifyAnother}>Verify another document</a>
         <a href={`${window.location.origin}/`}>Start over again</a>
       </div>}
-      {!docMutated && <section>
+      {!docValid && <section>
         <p>{text}</p>
         <div>
           <input className="button button--secondary"
             type="text"
-            id="input"
+            id="input1"
             name="msgIdOrtxhash"
             style={styles}
             placeholder="MessageID / Legacy-TX Hash"
@@ -94,7 +94,7 @@ class App extends Component {
           <div>
             <input className="button button--secondary"
               type="text"
-              id="input"
+              id="input2"
               name="legacyAddress"
               style={styles}
               placeholder="Legacy-Fetch Address"
