@@ -10,19 +10,24 @@ For more information, check the (currently slightly outdated) [Blueprint Overvie
 This blueprint is based on our PoEx-library [@iota/poex-tool](https://www.npmjs.com/package/@iota/poex-tool), which provides the functionality for publishing, fetching and verifying file fingerprints via the IOTA Tangle.
 
 
+## Pre-requisites
+
+```shell
+  npm install
+```
+
  # Start project
 
-```
-  npm i
-  npm run start
+ This will run the Webapp at http://localhost:3000.
 
+```shell
+  npm start
 ```
 
 
  # Deployment
 
-```
+```shell
   npm run build
   npm run deploy
-
 ```
