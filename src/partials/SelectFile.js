@@ -26,6 +26,8 @@ class SelectFile extends Component {
           valid={validText}
         />
       </div>
+      <p>Welcome to this short Demo of our Immutable Document Blueprint!</p>
+      <p>Documents are an important means of transporting information and contracts between parties. Being able to reliably prove that a document has not been changed from an established state helps ensure trust between parties. This demo illustrates a solution that automatically checks the signature of a previously signed document using the IOTA Tangle.</p>
 
       <div style={{ width: '100%', position: 'relative', overflow: 'hidden', display: 'inline-block' }}>
         <SelectFileArea fileSelected={this.props.hashValue} {...this.props} />
