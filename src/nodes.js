@@ -22,17 +22,25 @@ const nodes = [
   //   isMainnet: false
   // },
   {
-    nodeId: 'https://api.lb-0.testnet.chrysalis2.com',
+    nodeId: 'https://api.lb-0.h.chrysalis-devnet.iota.cafe/',
     isMainnet: false
   },
   {
-    nodeId: 'https://chrysalis-nodes.iota.cafe',
-    isMainnet: true
-  },
-  {
-    nodeId: 'https://chrysalis-nodes.iota.org',
-    isMainnet: true
-  },
+    nodeId: 'https://api.lb-1.h.chrysalis-devnet.iota.cafe/',
+    isMainnet: false
+  },  
+  //{
+  //  nodeId: 'https://api.lb-0.testnet.chrysalis2.com',
+  //  isMainnet: false
+  //},
+  //{
+  //  nodeId: 'https://chrysalis-nodes.iota.cafe',
+  //  isMainnet: true
+  //},
+  //{
+  //  nodeId: 'https://chrysalis-nodes.iota.org',
+  //  isMainnet: true
+  //},
 ]
 
 export default nodes

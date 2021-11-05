@@ -11,7 +11,7 @@
   "author": "Marwen Trabelsi, Ruben Koch",
   "license": "Apache-2.0",
   "dependencies": {
-    "@iota/client": "^0.4.0",
+    "@iota/client": "^0.6.5",
     "@iota/poex-tool": "^2.1.0",
     "iota-css-theme": "git+https://github.com/iotaledger/iota-css-theme.git",
     "react": "^16.14.0",
