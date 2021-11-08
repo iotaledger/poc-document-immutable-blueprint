@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { navMap } from './defaults'
 
 class Header extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
-    const currScrData = navMap.get(this.props.currPath)
+    const currScrData = navMap.get(window.location.pathname)
     const keys = Array.from(navMap.keys())
 
     return (<div>
